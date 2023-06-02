@@ -5,16 +5,21 @@ import { useState, useEffect } from "react";
 
 import Intro from "containers/Intro";
 import Login from "containers/Login";
+import Home from "containers/Home";
 
-export default function Home() {
-  const [showIntro, setShowIntro] = useState(true);
+import Upper from "foundations/Upper";
+
+export default function Page() {
+  const [state, setState] = useState("home");
 
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowIntro(false);
-    }, 2500);
-    return () => clearTimeout(timeout);
-  }, []);
+    if (state === "intro") {
+      const timeout = setTimeout(() => {
+        setState("login");
+      }, 2500);
+      return () => clearTimeout(timeout);
+    }
+  }, [state]);
 
   return (
     <>
@@ -25,8 +30,10 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
-        <Intro show={showIntro} />
-        <Login show={!showIntro} />
+        <Intro show={state === "intro"} />
+        <Login show={state === "login"} />
+        <Home show={state === "home"} />
+        {state === "home" && <Upper />}
       </BackgroundContainer>
     </>
   );

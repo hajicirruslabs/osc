@@ -100,4 +100,5 @@ export const Button = styled.div`
   ${FlexCenterStyle};
   text-align: center;
   font-family: Newsreader;
+  cursor: pointer;
 `;
