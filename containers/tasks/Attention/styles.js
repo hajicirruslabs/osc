@@ -63,30 +63,27 @@ export const VideoUpper = styled.div`
   display: flex;
   align-items: center;
   position: absolute;
-  top: 6px;
-  left: 6px;
+  top: 9px;
+  left: 9px;
 
   img {
-    width: 11px;
-    margin-left: 4px;
-    margin-right: 2px;
+    width: 16px;
+    margin-left: 6px;
+    margin-right: 3px;
   }
-  font-size: 8px;
+  font-size: 12px;
 `;
 
 export const Live = styled.div`
-  width: 40px;
-  height: 17px;
-  left: 37px;
-  top: 301px;
+  width: 60px;
+  height: 25px;
   ${FlexCenterStyle};
 
   background: #f02626;
   border-radius: 6px;
   font-style: normal;
   font-weight: 600;
-  font-size: 10px;
-  line-height: 15px;
+  font-size: 15px;
 
   display: flex;
   align-items: center;
@@ -99,9 +96,12 @@ export const TapZone = styled.div`
   ${FlexCenterStyle};
   cursor: pointer;
 
+  margin-top: -${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
+
   width: 100%;
   position: relative;
-  height: 40vh;
+  height: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 18) / 16}px;
+
   font-family: Newsreader;
   font-weight: 400;
   font-size: 20px;
@@ -114,6 +114,12 @@ export const TapZone = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
+
+  div {
+    margin-top: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
+    height: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
+    ${FlexCenterStyle};
+  }
 `;
 
 export const ButtonZone = styled.div`

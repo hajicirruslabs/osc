@@ -87,9 +87,9 @@ export default function Comp({ show, userName, osc }) {
           <h2>{`Here’s how you’re doing so far`}</h2>
         </S.TopSection>
 
-        <S.BalanceSection>
+        <S.BalanceSection onClick={() => setOscStep(1)}>
           <S.Balance>
-            <S.BalanceUpper onClick={() => setOscStep(1)}>
+            <S.BalanceUpper>
               <img src="/assets/icons/orange_currency_symbol.svg" />
               {tempOsc.toFixed(0)}
             </S.BalanceUpper>

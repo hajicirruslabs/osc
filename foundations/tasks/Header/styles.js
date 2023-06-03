@@ -19,6 +19,7 @@ export const Left = styled.div`
   top: 10px;
 
   font-size: 35px;
+  cursor: pointer;
 `;
 
 export const Middle = styled.div`

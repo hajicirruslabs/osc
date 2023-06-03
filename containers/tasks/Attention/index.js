@@ -7,6 +7,9 @@ import Header from "foundations/tasks/Header";
 import useResize from "utils/hooks/useResize";
 
 import { useSpring } from "react-spring";
+import * as easings from "d3-ease";
+
+import { toast, Toast } from "loplat-ui";
 
 const getRandom = (min, max) => Math.random() * (max - min) + min;
 
@@ -14,6 +17,30 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   const [second, setSecond] = useState(10);
   const router = useRouter();
 
+  const [displayOsc, setDisplayOsc] = useState(osc);
+
+  useSpring({
+    from: { progress: 0 },
+    to: { progress: second === 0 ? 1 : 0 },
+    config: { duration: 3000, easing: easings.easeCubicOut },
+    onChange: ({ value }) => {
+      setDisplayOsc(osc + 15 * value.progress);
+    },
+    onRest: () => {},
+  });
+
+  useEffect(() => {
+    if (second === 0) {
+      toast.success("15 OSC added", 2000);
+    }
+  }, [second]);
+
+  //back click
+  function handleBackClick() {
+    router.push(`/home?userName=${userName}&osc=${osc + (second === 0 ? 15 : 0)}`);
+  }
+
+  //inteval
   useEffect(() => {
     const interval = setInterval(() => {
       setSecond((prev) => Math.max(prev - 1, 0));
@@ -21,13 +48,9 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     return () => clearInterval(interval);
   }, []);
 
-  function handleBackClick() {
-    router.push(`/home?userName=${userName}&osc=${osc + second === 0 ? 15 : 0}`);
-  }
+  //livestream
 
   const [liveStreamNumber, setLiveStreamNumber] = useState(234);
-
-  //randomly adjust  using userandominterval
   useRandomInterval(
     () => {
       const delta = Math.floor(Math.random() * 3 - 1);
@@ -37,6 +60,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     300
   );
 
+  //heartel
   const [heartEls, setHeartEls] = useState([]);
   function onTap(e) {
     const startPos = {
@@ -62,7 +86,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
             name: "Pay Attention",
             osc: 15,
           }}
-          osc={osc}
+          osc={displayOsc.toFixed(0)}
           handleBackClick={handleBackClick}
         />
         <S.Text>
@@ -81,10 +105,12 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
           </S.LiveVideoEl>
         </S.LiveStream>
 
-        <S.TapZone onClick={onTap}>Tap to show your love</S.TapZone>
+        <S.TapZone onClick={onTap}>
+          <div> Tap to show your love</div>
+        </S.TapZone>
 
         <S.ButtonZone>
-          <S.Button completed={second === 0} onClick={() => router.push(`/home?userName=${userName}&osc=${osc + 15}`)}>
+          <S.Button completed={second === 0} onClick={() => second === 0 && router.push(`/home?userName=${userName}&osc=${osc + 15}`)}>
             {second === 0 ? "Complete" : `Keep watching for ${second}s`}
           </S.Button>
           <p>Zone as directed by local airtender</p>
@@ -93,6 +119,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
       {heartEls.map((el) => (
         <SingleHeartEl key={el.id} startPos={el.startPos} />
       ))}
+      <Toast />
     </>
   );
 }

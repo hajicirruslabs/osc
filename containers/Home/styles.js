@@ -131,6 +131,7 @@ export const SingleItem = styled.div`
   height: 73px;
   margin: 4px 0;
   border-radius: 10px;
+  cursor: pointer;
 `;
 
 export const ItemLeft = styled.div`
