@@ -19,13 +19,18 @@ export const Inner = css`
   position: absolute;
   top: 0;
   font-family: Poppins;
+  margin: 0;
+  padding: 0;
   color: #fff0e8;
-  left: ${({ theme }) => (theme.windowWidth - Math.min(theme.windowWidth, 768)) / 2}px;
-  width: ${({ theme }) => Math.min(theme.windowWidth, 768)}px;
-  height: ${({ theme }) => theme.windowHeight}px;
+  left: ${({ theme }) => (theme.windowWidth > 768 ? (theme.windowWidth - 768) / 2 : 0)}px;
   overflow: hidden;
+  overflow-y: scroll;
+  width: ${({ theme }) => (theme.windowWidth > 768 ? 768 : theme.windowWidth)}px;
+  height: ${({ theme }) => theme.windowHeight}px;
 `;
 
+///TO DO: GLSL BACKGROUND
+//https://webflow.com/made-in-webflow/website/webgl-glsl-gradient
 export const BackgroundContainer = styled.div`
   ${WholeContainer};
   ${FlexCenterStyle};

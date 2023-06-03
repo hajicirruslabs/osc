@@ -11,6 +11,7 @@ import Upper from "foundations/Upper";
 
 export default function Page() {
   const [state, setState] = useState("home");
+  const [userName, setUserName] = useState("Cyan");
 
   useEffect(() => {
     if (state === "intro") {
@@ -31,8 +32,14 @@ export default function Page() {
       </Head>
       <BackgroundContainer>
         <Intro show={state === "intro"} />
-        <Login show={state === "login"} />
-        <Home show={state === "home"} />
+        <Login
+          show={state === "login"}
+          handleNext={(name) => {
+            setUserName(name);
+            setState("home");
+          }}
+        />
+        <Home show={state === "home"} userName={userName} />
         {state === "home" && <Upper />}
       </BackgroundContainer>
     </>

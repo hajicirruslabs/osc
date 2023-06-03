@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 
-export default function Comp({ show }) {
+export default function Comp({ show, handleNext }) {
   const [inputVal, setInputVal] = useState("");
 
   return (
@@ -39,7 +39,7 @@ export default function Comp({ show }) {
 
         <S.InputContainer>
           <S.Input type="text" placeholder="Enter your name" value={inputVal} onChange={(e) => setInputVal(e.target.value)} />
-          <S.Button>Log in</S.Button>
+          <S.Button onClick={() => handleNext(inputVal)}>Log in</S.Button>
         </S.InputContainer>
       </S.Main>
     </S.Container>
