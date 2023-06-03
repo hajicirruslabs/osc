@@ -38,6 +38,7 @@ export const LogoContainer = styled.div`
 `;
 
 export const Main = styled.div`
+  margin-top: 40px;
   ${FlexCenterStyle};
   flex-direction: column;
 `;
@@ -46,17 +47,14 @@ export const Text = styled.div`
   text-align; center;
   ${FlexCenterStyle};
   flex-direction: column;
-  font-size: 24px;
-  bold {
-    font-weight: bold;
-  }
-
+  font-size: 20px;
+ 
 `;
 
 export const ModelContainer = styled.div`
   width: 300px;
-  height: 259px;
-  margin: 15px 0;
+  height: 250px;
+  margin: 12px 0;
 `;
 
 export const InputContainer = styled.div`
@@ -74,12 +72,12 @@ export const Input = styled.input`
 
   border: 0;
   outline: 0;
-  font-size: 24px;
+  font-size: 20px;
 
   ${FlexCenterStyle};
   text-align: center;
   font-family: Newsreader;
-  height: 53px;
+  height: 45px;
 
   &:focus {
     box-shadow: 0 0 30px 0 ${C.WHITE};
@@ -97,10 +95,10 @@ export const Button = styled.div`
   border-radius: 10px;
   background: ${C.ORANGE};
   color: ${C.WHITE};
-  height: 53px;
-  margin: 14px 0;
+  height: 45px;
+  margin: 10px 0;
 
-  font-size: 24px;
+  font-size: 20px;
   ${FlexCenterStyle};
   text-align: center;
   font-family: Newsreader;

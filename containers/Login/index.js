@@ -1,6 +1,6 @@
 import * as S from "./styles";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
@@ -17,19 +17,21 @@ export default function Comp({ show = false, handleNext }) {
       <S.Main>
         <S.Text>
           <p>
-            <bold>Sage0238</bold> is currently 14th
+            <b>Sage0238</b> is currently 14th
           </p>
           <p>most flourishing!</p>
         </S.Text>
 
         <S.ModelContainer>
-          <Canvas>
-            <ambientLight intensity={0.5} />
+          <Suspense fallback={null}>
+            <Canvas>
+              <ambientLight intensity={0.5} />
 
-            <pointLight position={[10, 10, 10]} />
-            <Model />
-            <OrbitControls />
-          </Canvas>
+              <pointLight position={[10, 10, 10]} />
+              <Model />
+              <OrbitControls />
+            </Canvas>
+          </Suspense>
         </S.ModelContainer>
 
         <S.Text>
