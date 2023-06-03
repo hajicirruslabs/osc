@@ -37,6 +37,12 @@ export const BackgroundContainer = styled.div`
   background: linear-gradient(118.05deg, #9a2901 5.83%, #e25b2d 42.75%, #f0b6ab 90.92%);
 `;
 
+export const TaskBackgroundContainer = styled.div`
+  ${WholeContainer};
+  ${FlexCenterStyle};
+  background: ${({ color }) => color};
+`;
+
 export const Appear = keyframes`
   from {
     opacity: 0;

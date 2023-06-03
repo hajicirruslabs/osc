@@ -2,8 +2,8 @@ import * as S from "./styles";
 
 import { useState, useEffect } from "react";
 
-import { useGLTF, OrbitControls } from "@react-three/drei";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import Upper from "foundations/Upper";
+import { useRouter } from "next/router";
 
 const ITEMS = [
   {
@@ -11,18 +11,21 @@ const ITEMS = [
     text: "Pay Attention",
     osc: "15",
     icon: "/assets/icons/lists/attention.svg",
+    url: "/tasks/attention",
   },
   {
     color: "hsla(137, 21%, 50%, 1)",
     text: "Breathe",
     osc: "26",
     icon: "/assets/icons/lists/breathe.svg",
+    url: "/tasks/breathe",
   },
   {
     color: "hsla(10, 55%, 39%, 0.34)",
     text: "Tranfuse Blood",
     osc: "450",
     icon: "/assets/icons/lists/blood.svg",
+    url: "/tasks/blood",
     disabled: true,
   },
   {
@@ -30,15 +33,17 @@ const ITEMS = [
     text: "Follicle Donation",
     osc: "213",
     icon: "/assets/icons/lists/hair.svg",
+    url: "/tasks/dontaion",
     disabled: true,
   },
 ];
 
-export default function Comp({ show, userName }) {
-  const [inputVal, setInputVal] = useState("");
+export default function Comp({ show, userName, osc }) {
+  const router = useRouter();
 
   return (
     <S.Container show={show}>
+      <Upper />
       <S.Main>
         <S.TopSection>
           <h1>Hello, {userName}!</h1>
@@ -49,7 +54,7 @@ export default function Comp({ show, userName }) {
           <S.Balance>
             <S.BalanceUpper>
               <img src="/assets/icons/orange_currency_symbol.svg" />
-              310
+              {osc}
             </S.BalanceUpper>
             <S.BalanceLower>Your OSC balance</S.BalanceLower>
           </S.Balance>
@@ -62,7 +67,7 @@ export default function Comp({ show, userName }) {
           <h2>Give to grow your social capital</h2>
           <S.List>
             {ITEMS.map((item, i) => (
-              <S.SingleItem key={i}>
+              <S.SingleItem key={i} onClick={() => router.push(`${item.url}?userName=${userName}&osc=${osc}`)}>
                 <S.ItemLeft color={item.color}>
                   <img src={item.icon} />
                 </S.ItemLeft>

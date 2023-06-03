@@ -29,6 +29,9 @@ export const Main = styled.div`
   z-index: 1;
 
   width: 100%;
+
+  min-height: ${({ theme }) => theme.windowHeight * 1.3}px;
+  overflow-y: scroll;
 `;
 
 export const TopSection = styled.div`

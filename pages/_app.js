@@ -182,6 +182,11 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
 
+//hide scrollbar
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
   /* Firefox */
   input[type=number] {
     -moz-appearance: textfield;
