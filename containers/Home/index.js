@@ -5,6 +5,11 @@ import { useState, useEffect } from "react";
 import Upper from "foundations/Upper";
 import { useRouter } from "next/router";
 
+import { useSpring } from "react-spring";
+import * as easings from "d3-ease";
+
+import { toast, Toast } from "loplat-ui";
+
 const ITEMS = [
   {
     color: "hsla(21, 91%, 55%, 1)",
@@ -40,6 +45,38 @@ const ITEMS = [
 
 export default function Comp({ show, userName, osc }) {
   const router = useRouter();
+  const [tempOsc, setTempOsc] = useState(osc);
+  const [oscStep, setOscStep] = useState(0);
+
+  useSpring({
+    from: { progress: oscStep === 2 ? 1 : 0 },
+    to: { progress: oscStep === 1 ? 1 : 0 },
+    config: { duration: 4500, easing: oscStep === 2 ? easings.easeCubicIn : easings.easeCubicOut },
+    onChange: ({ value }) => {
+      setTempOsc(osc + 80 * value.progress);
+    },
+    onRest: () => {
+      if (oscStep === 1) {
+        setTimeout(() => {
+          setOscStep(2);
+        }, 500);
+      }
+      if (oscStep === 2) {
+        setTimeout(() => {
+          setOscStep(0);
+        }, 1000);
+      }
+    },
+  });
+
+  useEffect(() => {
+    if (oscStep === 1) {
+      toast.info("Want to earn more OSC?");
+    }
+    if (oscStep === 2) {
+      toast.danger(`Give to grow your social capital: There is no free OSC.`);
+    }
+  }, [oscStep]);
 
   return (
     <S.Container show={show}>
@@ -52,9 +89,9 @@ export default function Comp({ show, userName, osc }) {
 
         <S.BalanceSection>
           <S.Balance>
-            <S.BalanceUpper>
+            <S.BalanceUpper onClick={() => setOscStep(1)}>
               <img src="/assets/icons/orange_currency_symbol.svg" />
-              {osc}
+              {tempOsc.toFixed(0)}
             </S.BalanceUpper>
             <S.BalanceLower>Your OSC balance</S.BalanceLower>
           </S.Balance>
@@ -85,6 +122,7 @@ export default function Comp({ show, userName, osc }) {
           </S.List>
         </S.ListSection>
       </S.Main>
+      <Toast />
     </S.Container>
   );
 }

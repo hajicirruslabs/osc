@@ -2,11 +2,15 @@ import { FlexCenterStyle, Inner, WholeContainer } from "styles/common";
 import * as C from "styles/common/color";
 import styled from "styled-components";
 
+import { Appear } from "@/styles/common";
+
 export const Container = styled.div`
   ${Inner};
   ${FlexCenterStyle};
 
   opacity: 0;
+  pointer-events: none;
+  z-index: 0;
 
   ${({ show }) =>
     show
@@ -19,7 +23,7 @@ export const Container = styled.div`
     pointer-events: none;
   `}
 
-  transition: opacity 0.5s ease-in-out;
+  transition: opacity 1s ease-in-out;
 `;
 
 export const LogoContainer = styled.div`

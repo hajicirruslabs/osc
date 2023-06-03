@@ -19,7 +19,7 @@ export default function Page() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
-        <Home show={true} userName={userName || "Cyan"} osc={osc || 310} />
+        <Home show={true} userName={userName || "Cyan"} osc={parseFloat(osc) || 310} />
       </BackgroundContainer>
     </>
   );

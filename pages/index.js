@@ -2,6 +2,7 @@ import Head from "next/head";
 import { BackgroundContainer } from "styles/common";
 
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 import Intro from "containers/Intro";
 import Login from "containers/Login";
@@ -17,10 +18,12 @@ export default function Page() {
     if (state === "intro") {
       const timeout = setTimeout(() => {
         setState("login");
-      }, 2500);
+      }, 1500);
       return () => clearTimeout(timeout);
     }
   }, [state]);
+
+  const router = useRouter();
 
   return (
     <>
@@ -31,14 +34,14 @@ export default function Page() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
-        <Intro show={state === "intro"} />
         <Login
           show={state === "login"}
           handleNext={(name) => {
             setUserName(name);
-            setState("home");
+            router.push(`/home?userName=${name}`);
           }}
         />
+        <Intro show={state === "intro"} />
       </BackgroundContainer>
     </>
   );

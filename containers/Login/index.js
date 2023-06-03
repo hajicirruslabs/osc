@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 
-export default function Comp({ show, handleNext }) {
+export default function Comp({ show = false, handleNext }) {
   const [inputVal, setInputVal] = useState("");
 
   return (

@@ -8,7 +8,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   const router = useRouter();
 
   function handleBackClick() {
-    router.push(`/home?userName=${userName}`);
+    router.push(`/home?userName=${userName}&osc=${osc}`);
   }
 
   return (
@@ -31,7 +31,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
         <img src="/assets/images/plant.svg" />
       </S.ImageZone>
 
-      <S.ButtonZone>
+      <S.ButtonZone onClick={() => router.push(`/home?userName=${userName}&osc=${osc}`)}>
         <S.Button>{"Return Home"}</S.Button>
         <p>Nature access in your region grows with OSC </p>
       </S.ButtonZone>

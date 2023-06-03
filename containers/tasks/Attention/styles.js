@@ -4,11 +4,12 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   ${Inner};
-  display: flex;
-  flex-direction: column;
+  // display: flex;
+  // flex-direction: column;
+
   overflow-y: scroll;
 
-  min-height: ${({ theme }) => theme.windowHeight}px;
+  min-height: ${({ theme }) => theme.windowHeight * 1}px;
   transition: opacity 0.5s ease-in-out;
 `;
 
@@ -51,6 +52,11 @@ export const LiveVideoEl = styled.div`
   position: relative;
 
   background: rgba(9, 9, 9, 0.6);
+
+  video {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const VideoUpper = styled.div`
@@ -91,13 +97,18 @@ export const Live = styled.div`
 
 export const TapZone = styled.div`
   ${FlexCenterStyle};
+  cursor: pointer;
 
   width: 100%;
+  position: relative;
   height: 40vh;
   font-family: Newsreader;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+
+  color: #f46d22;
+
   /* identical to box height */
 
   display: flex;
@@ -126,6 +137,7 @@ export const ButtonZone = styled.div`
 
 export const Button = styled.div`
   width: 100%;
+  cursor: pointer;
 
   border-radius: 10px;
   font-family: Newsreader;
@@ -142,4 +154,18 @@ export const Button = styled.div`
 
   ${({ completed }) => completed && `background: #F46D22; color: #fff;`}
   transition: all 0.5s ease-in-out;
+`;
+
+export const SingleHeart = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 700;
+  width: 40px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
