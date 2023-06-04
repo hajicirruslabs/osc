@@ -58,7 +58,7 @@ export const BalanceSection = styled.div`
   height: 500px !important;
   margin: -80px 0;
   width: 400px;
-  margin-left: ${({ theme }) => (theme.windowWidth - 400) / 2}px;
+  margin-left: ${({ theme }) => (Math.min(theme.windowWidth, 768) - 400) / 2}px;
   ${FlexCenterStyle};
   overflow-x: hidden;
   z-index: 0;
