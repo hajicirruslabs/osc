@@ -24,13 +24,16 @@ export const Container = styled.div`
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  justify-content: space-between;
 
   overflow-y: scroll;
   z-index: 1;
 
   width: 100%;
 
-  min-height: ${({ theme }) => theme.windowHeight * 1.3}px;
+  min-height: 900px;
   overflow-y: scroll;
 `;
 
@@ -52,8 +55,9 @@ export const TopSection = styled.div`
 
 export const BalanceSection = styled.div`
   position: relative;
-  height: 400px;
-  min-width: 100%;
+  height: 400px !important;
+  width: 100%;
+
   ${FlexCenterStyle};
   overflow-x: hidden;
   z-index: 0;

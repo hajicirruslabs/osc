@@ -101,13 +101,11 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
               <img src="/assets/icons/viewers.svg" />
               {liveStreamNumber}
             </S.VideoUpper>
-            <video src="/assets/videos/vid.mp4" autoPlay loop />
+            <video src="/assets/videos/vid.mp4" type="video/mp4" autoPlay="autoplay" loop playsInline muted preload="auto" controls={false} />
           </S.LiveVideoEl>
         </S.LiveStream>
 
-        <S.TapZone onClick={onTap}>
-          <div> Tap to show your love</div>
-        </S.TapZone>
+        <S.TapZone onClick={onTap}>Tap to show your love</S.TapZone>
 
         <S.ButtonZone>
           <S.Button completed={second === 0} onClick={() => second === 0 && router.push(`/home?userName=${userName}&osc=${osc + 15}`)}>

@@ -6,11 +6,15 @@ import { Appear } from "@/styles/common";
 
 export const Container = styled.div`
   ${Inner};
-  ${FlexCenterStyle};
+  display: flex;
+  justify-content: center;
 
   opacity: 0;
   pointer-events: none;
   z-index: 0;
+
+  min-height: ${({ theme }) => theme.windowHeight * 1.03}px;
+  overflow-y: scroll;
 
   ${({ show }) =>
     show
@@ -38,7 +42,7 @@ export const LogoContainer = styled.div`
 `;
 
 export const Main = styled.div`
-  margin-top: 40px;
+  margin-top: 100px;
   ${FlexCenterStyle};
   flex-direction: column;
 `;
@@ -54,12 +58,13 @@ export const Text = styled.div`
 export const ModelContainer = styled.div`
   width: 300px;
   height: 250px;
-  margin: 12px 0;
+  margin: 8px 0;
 `;
 
 export const InputContainer = styled.div`
   width: ${({ theme }) => Math.min(theme.windowWidth * 0.8, 400)}px;
-  margin-top: 40px;
+  margin-top: 20px;
+  margin-bottom: 30px;
 `;
 
 export const Input = styled.input`
@@ -77,7 +82,7 @@ export const Input = styled.input`
   ${FlexCenterStyle};
   text-align: center;
   font-family: Newsreader;
-  height: 45px;
+  height: 40px;
 
   &:focus {
     box-shadow: 0 0 30px 0 ${C.WHITE};
@@ -95,7 +100,7 @@ export const Button = styled.div`
   border-radius: 10px;
   background: ${C.ORANGE};
   color: ${C.WHITE};
-  height: 45px;
+  height: 40px;
   margin: 10px 0;
 
   font-size: 20px;

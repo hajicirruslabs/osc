@@ -57,14 +57,10 @@ export default function Comp({ show, userName, osc }) {
     },
     onRest: () => {
       if (oscStep === 1) {
-        setTimeout(() => {
-          setOscStep(2);
-        }, 500);
+        setOscStep(2);
       }
       if (oscStep === 2) {
-        setTimeout(() => {
-          setOscStep(0);
-        }, 1000);
+        setOscStep(0);
       }
     },
   });

@@ -96,11 +96,11 @@ export const TapZone = styled.div`
   ${FlexCenterStyle};
   cursor: pointer;
 
-  margin-top: -${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
+  margin-top: 0;
 
   width: 100%;
   position: relative;
-  height: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 18) / 16}px;
+  height: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
 
   font-family: Newsreader;
   font-weight: 400;
@@ -114,12 +114,6 @@ export const TapZone = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
-
-  div {
-    margin-top: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
-    height: ${({ theme }) => ((Math.min(theme.windowWidth, 768) - 40) * 9) / 16}px;
-    ${FlexCenterStyle};
-  }
 `;
 
 export const ButtonZone = styled.div`
