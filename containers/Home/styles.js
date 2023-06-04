@@ -26,14 +26,14 @@ export const Main = styled.div`
   flex-direction: column;
   position: relative;
 
-  justify-content: space-between;
+  // justify-content: space-between;
 
   overflow-y: scroll;
   z-index: 1;
 
   width: 100%;
 
-  min-height: 900px;
+  min-height: 1000px;
   overflow-y: scroll;
 `;
 
@@ -55,9 +55,10 @@ export const TopSection = styled.div`
 
 export const BalanceSection = styled.div`
   position: relative;
-  height: 400px !important;
-  width: 100%;
-
+  height: 500px !important;
+  margin: -80px 0;
+  width: 400px;
+  margin-left: ${({ theme }) => (theme.windowWidth - 400) / 2}px;
   ${FlexCenterStyle};
   overflow-x: hidden;
   z-index: 0;

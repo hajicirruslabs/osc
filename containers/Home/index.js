@@ -91,9 +91,9 @@ export default function Comp({ show, userName, osc }) {
             </S.BalanceUpper>
             <S.BalanceLower>Your OSC balance</S.BalanceLower>
           </S.Balance>
-          {/* {new Array(4).fill(0).map((_, i) => (
+          {new Array(4).fill(0).map((_, i) => (
             <S.SurroundingCirlces key={i} idx={i + 1} />
-          ))} */}
+          ))}
         </S.BalanceSection>
 
         <S.ListSection>
