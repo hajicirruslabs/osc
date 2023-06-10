@@ -3,7 +3,7 @@ import { TaskBackgroundContainer } from "styles/common";
 
 import { useRouter } from "next/router";
 
-import Blood from "containers/tasks/Blood";
+import Blood from "containers/mobile/tasks/Blood";
 
 export default function Page() {
   const router = useRouter();

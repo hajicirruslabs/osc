@@ -3,7 +3,7 @@ import { TaskBackgroundContainer } from "styles/common";
 
 import { useRouter } from "next/router";
 
-import Attention from "containers/tasks/Attention";
+import Attention from "containers/mobile/tasks/Attention";
 
 export default function Page() {
   const router = useRouter();

@@ -4,9 +4,9 @@ import { BackgroundContainer } from "styles/common";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-import Intro from "containers/Intro";
-import Login from "containers/Login";
-import Home from "containers/Home";
+import Intro from "containers/mobile/Intro";
+import Login from "containers/mobile/Login";
+import Home from "containers/mobile/Home";
 
 import Upper from "foundations/Upper";
 

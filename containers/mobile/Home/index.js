@@ -38,7 +38,7 @@ const ITEMS = [
     text: "Follicle Donation",
     osc: "213",
     icon: "/assets/icons/lists/hair.svg",
-    url: "/tasks/dontaion",
+    url: "/tasks/donation",
     disabled: true,
   },
 ];
