@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { Appear } from "@/styles/common";
 
 export const Container = styled.div`
-  ${Inner};
+  ${FlexCenterStyle};
   ${WholeContainer};
 `;
 

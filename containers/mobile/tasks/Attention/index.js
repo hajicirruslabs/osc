@@ -50,15 +50,14 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
 
   //livestream
 
-  const [liveStreamNumber, setLiveStreamNumber] = useState(234);
-  useRandomInterval(
-    () => {
-      const delta = Math.floor(Math.random() * 3 - 1);
-      setLiveStreamNumber((prev) => Math.max(prev + delta, 0));
-    },
-    10,
-    300
-  );
+  // useRandomInterval(
+  //   () => {
+  //     const delta = Math.floor(Math.random() * 3 - 1);
+  //     setLiveStreamNumber((prev) => Math.max(prev + delta, 0));
+  //   },
+  //   10,
+  //   300
+  // );
 
   //heartel
   const [heartEls, setHeartEls] = useState([]);
@@ -99,7 +98,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
             <S.VideoUpper>
               <S.Live>Live</S.Live>
               <img src="/assets/icons/viewers.svg" />
-              {liveStreamNumber}
+              {234}
             </S.VideoUpper>
             <video src="/assets/videos/vid.mp4" type="video/mp4" autoPlay="autoplay" loop playsInline muted preload="auto" controls={false} />
           </S.LiveVideoEl>
