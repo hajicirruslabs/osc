@@ -10,6 +10,14 @@ export const Container = styled.div`
   color: #fff0e8;
   font-family: Poppins;
 `;
+export const Background = styled.div`
+  ${FlexCenterStyle};
+  ${WholeContainer};
+  img {
+    width: 80%;
+    height: 80%;
+  }
+`;
 
 export const LogoContainer = styled.div`
   position: absolute;
@@ -47,7 +55,7 @@ export const Table = styled.div`
 export const LeftColumn = styled.div`
   display: flex;
   flex-direction: column;
-  width: 13vw;
+  width: 15vw;
 `;
 
 export const RightColumn = styled.div`
@@ -67,15 +75,15 @@ export const TableTitle = styled.div`
 `;
 
 export const Item = styled.div`
-  font-family: Newsreader;
+  font-family: Poppins;
   color: #ddd;
   margin: 0.2vw 0;
   height: 1.4vw;
-  font-size: 1.3vw;
+  font-size: 1.1vw;
   display: flex;
   align-items: center;
   span {
-    font-size: 1.1vw;
+    font-size: 0.9vw;
     opacity: 0.7;
     margin-left: 0.3vw;
     padding-left: 0.3vw;
@@ -98,7 +106,7 @@ export const Item = styled.div`
 `;
 
 export const Span = styled.div`
-  font-size: 1.3vw !important;
+  font-size: 1.1vw !important;
   opacity: 1 !important;
   margin: 0 !important;
   width: 3vw !important;
@@ -135,7 +143,7 @@ export const Commercial = styled.div`
 export const QRContainer = styled.div`
   ${FlexCenterStyle};
   width: 100%;
-  margin-top: 1vw;
+  margin-top: 3vw;
 `;
 
 export const QRWrapper = styled.div`

@@ -8,13 +8,16 @@ const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 export default function Comp() {
   return (
     <S.Container>
+      <S.Background>
+        <img src="/assets/screen/Company-Logo.svg" alt="logo" />
+      </S.Background>
       <S.LogoContainer>
         <img src="/assets/images/logo-small.svg" alt="logo" />
       </S.LogoContainer>
 
       <S.Left>
         <Currency />
-        <S.Commercial></S.Commercial>
+        {/* <S.Commercial></S.Commercial> */}
         <S.QRContainer>
           <S.QRWrapper>
             <img src="/assets/screen/QR.svg" alt="qr" />

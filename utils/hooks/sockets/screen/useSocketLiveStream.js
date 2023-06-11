@@ -13,10 +13,14 @@ export default function useSocketInit({ handleNewHeart }) {
     socket.current = io({
       transports: ["websocket"],
     });
-    console.log(socket.current);
 
     socket.current.on("connect", () => {
       console.log("socket connected");
+    });
+    console.log(socket.current);
+
+    socket.current.on("connect_error", (err) => {
+      console.log(`connect_error due to ${err.message}`);
     });
 
     socket.current.on("new-handle-heart", (data) => {

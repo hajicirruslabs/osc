@@ -1,10 +1,10 @@
 import * as S from "./styles";
 
 import { useState, useEffect, useCallback, useMemo } from "react";
-import useRandomInterval from "utils/hooks/useRandomInterval";
 import { useRouter } from "next/router";
 import Header from "foundations/tasks/Header";
 import useResize from "utils/hooks/useResize";
+import useSocket from "utils/hooks/sockets/useSocketMobile";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
@@ -16,8 +16,12 @@ const getRandom = (min, max) => Math.random() * (max - min) + min;
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const [second, setSecond] = useState(10);
   const router = useRouter();
+  const socket = useSocket();
 
   const [displayOsc, setDisplayOsc] = useState(osc);
+  useEffect(() => {
+    setDisplayOsc(osc);
+  }, [osc]);
 
   useSpring({
     from: { progress: 0 },
@@ -49,15 +53,6 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   }, []);
 
   //livestream
-
-  // useRandomInterval(
-  //   () => {
-  //     const delta = Math.floor(Math.random() * 3 - 1);
-  //     setLiveStreamNumber((prev) => Math.max(prev + delta, 0));
-  //   },
-  //   10,
-  //   300
-  // );
 
   //heartel
   const [heartEls, setHeartEls] = useState([]);
@@ -114,14 +109,14 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
         </S.ButtonZone>
       </S.Container>
       {heartEls.map((el) => (
-        <SingleHeartEl key={el.id} startPos={el.startPos} />
+        <SingleHeartEl key={el.id} startPos={el.startPos} socket={socket} />
       ))}
       <Toast />
     </>
   );
 }
 
-function SingleHeartEl({ startPos }) {
+function SingleHeartEl({ startPos, socket }) {
   const [windowWidth, windowHeight] = useResize();
   const duration = useMemo(() => getRandom(500, 4000), []);
   const tension = useMemo(() => getRandom(10, 200), []);
@@ -160,6 +155,15 @@ function SingleHeartEl({ startPos }) {
     const opacity = progress > 0.9 ? 1 - (progress - 0.9) * 10 : 1;
     const scale = initialPos.scale + (targetPos.scale - initialPos.scale) * progress;
     setPos({ x, y, rotation, opacity, scale });
+
+    if (progress === 1) {
+      try {
+        socket.current.emit("handle-heart", targetPos);
+        console.log(targetPos);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }, [STATIC_POS, progress]);
 
   useSpring({
