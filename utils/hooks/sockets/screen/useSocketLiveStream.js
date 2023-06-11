@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { useEffect, useRef } from "react";
 
-export default function useSocketInit({ handleNewHeart }) {
+export default function useSocketInit({ handleNewHeart, handleNewLiveStreamNumber, handleNewPageLocation }) {
   const socket = useRef(null);
   useEffect(() => {
     socketInitializer();
@@ -24,9 +24,9 @@ export default function useSocketInit({ handleNewHeart }) {
       console.log(`connect_error due to ${err.message}`);
     });
 
-    socket.current.on("new-handle-heart", (data) => {
-      handleNewHeart(data);
-    });
+    socket.current.on("new-handle-heart", handleNewHeart);
+    socket.current.on("new-handle-livestream-number", handleNewLiveStreamNumber);
+    socket.current.on("new-handle-page-location", handleNewPageLocation);
   }
 
   return socket;

@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Header from "foundations/tasks/Header";
 import useResize from "utils/hooks/useResize";
 import useSocket from "utils/hooks/sockets/useSocketMobile";
+import useRandomInterval from "utils/hooks/useRandomInterval";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
@@ -12,6 +13,7 @@ import * as easings from "d3-ease";
 import { toast, Toast } from "loplat-ui";
 
 const getRandom = (min, max) => Math.random() * (max - min) + min;
+const getRandomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
 
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const [second, setSecond] = useState(10);
@@ -54,6 +56,22 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
 
   //livestream
 
+  const [liveStream, setLiveStream] = useState(234);
+
+  useRandomInterval(
+    () => {
+      setLiveStream((prev) => Math.floor(Math.max(prev + getRandomInt(-1, 1), 0)));
+    },
+    10,
+    500
+  );
+
+  useEffect(() => {
+    //on livestream change
+    if (!socket.current) return;
+    socket.current.emit("handle-livestream-number", liveStream);
+  }, [liveStream]);
+
   //heartel
   const [heartEls, setHeartEls] = useState([]);
   function onTap(e) {
@@ -93,7 +111,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
             <S.VideoUpper>
               <S.Live>Live</S.Live>
               <img src="/assets/icons/viewers.svg" />
-              {234}
+              {liveStream}
             </S.VideoUpper>
             <video src="/assets/videos/vid.mp4" type="video/mp4" autoPlay="autoplay" loop playsInline muted preload="auto" controls={false} />
           </S.LiveVideoEl>

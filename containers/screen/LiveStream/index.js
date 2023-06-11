@@ -1,12 +1,14 @@
 import * as S from "./styles";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import useResize from "utils/hooks/useResize";
 import useRandomInterval from "utils/hooks/useRandomInterval";
 import useSocket from "utils/hooks/sockets/screen/useSocketLiveStream";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
+
+import { RANDOM_NAMES } from "./names";
 
 const ARRAY_LEFT = ["Activated CO2 in %", "Care hours attended", "Blood-nitrogen in %", "Love given in Hearts", "OSC per capita"];
 
@@ -27,8 +29,8 @@ export default function Comp() {
       if (Math.random() < 0.15) setValA((prev) => Math.max(prev + getRandom(-0.01, 0.01) * 63, 0));
       if (Math.random() < 0.1) setValB((prev) => Math.max(prev + getRandomInt(0, 2), 0));
       if (Math.random() < 0.2) setValC((prev) => Math.max(prev + getRandom(-0.01, 0.01) * 3.4, 0));
-      setValD((prev) => Math.max(prev + getRandomInt(0, 2), 0));
-      if (Math.random() < 0.1) setValE((prev) => Math.max(prev + getRandom(-0.01, 0.01) * 437, 0));
+      if (Math.random() < 0.2) setValD((prev) => Math.max(prev + getRandomInt(0, 2), 0));
+      if (Math.random() < 0.1) setValE((prev) => Math.max(prev + getRandom(-0.001, 0.01) * 437, 0));
     },
     10,
     300
@@ -36,11 +38,27 @@ export default function Comp() {
   //socket
   const socket = useSocket({
     handleNewHeart,
+    handleNewLiveStreamNumber,
   });
 
   const [heartEls, setHeartEls] = useState([]);
   function handleNewHeart(data) {
     setHeartEls((prev) => [...prev, data]);
+    setValD((prev) => prev + 1);
+  }
+
+  const [liveStream, setLiveStream] = useState(234);
+  const liveStreamRef = useRef(234);
+  useEffect(() => {
+    liveStreamRef.current = liveStream;
+  }, [liveStream]);
+  //todo: enter and exit
+  function handleNewLiveStreamNumber(data) {
+    setLiveStream(data);
+    //if livestream increased
+    if (data > liveStreamRef.current) {
+    } else {
+    }
   }
 
   return (
@@ -50,28 +68,32 @@ export default function Comp() {
       </S.LogoContainer>
 
       <S.VideoContainer>
-        <video
-          width={Math.max(windowWidth, (windowHeight * 16) / 9)}
-          height={Math.max(windowHeight, (windowWidth * 9) / 16)}
-          style={{
-            width: Math.max(windowWidth, (windowHeight * 16) / 9),
-            height: Math.max(windowHeight, (windowWidth * 9) / 16),
-          }}
-          src="/assets/videos/vid.mp4"
-          type="video/mp4"
-          autoPlay="autoplay"
-          loop
-          playsInline
-          muted
-          preload="auto"
-          controls={false}
-        />
+        {new Array(9).fill(0).map((_, i) => (
+          <S.SingleVideo key={i}>
+            <video
+              width={Math.max(windowWidth, (windowHeight * 16) / 9) / 3}
+              height={Math.max(windowHeight, (windowWidth * 9) / 16) / 3}
+              style={{
+                width: Math.max(windowWidth, (windowHeight * 16) / 9) / 3,
+                height: Math.max(windowHeight, (windowWidth * 9) / 16) / 3,
+              }}
+              src="/assets/videos/vid.mp4"
+              type="video/mp4"
+              autoPlay="autoplay"
+              loop
+              playsInline
+              muted
+              preload="auto"
+              controls={false}
+            />
+          </S.SingleVideo>
+        ))}
       </S.VideoContainer>
 
       <S.VideoUpper>
         <S.Live>Live</S.Live>
         <img src="/assets/screen/Viewers.svg" />
-        {234}
+        {liveStream}
       </S.VideoUpper>
 
       <S.InformationBoard>
@@ -93,7 +115,7 @@ export default function Comp() {
         </S.Arrays>
       </S.InformationBoard>
 
-      {heartEls.slice(-200).map((el, i) => (
+      {heartEls.map((el, i) => (
         <SingleHeartEl key={i} startPos={el} socket={socket} />
       ))}
     </S.Container>

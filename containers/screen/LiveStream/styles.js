@@ -7,6 +7,7 @@ import { Appear } from "@/styles/common";
 export const Container = styled.div`
   ${FlexCenterStyle};
   ${WholeContainer};
+  transition: 0.5s;
 `;
 
 export const LogoContainer = styled.div`
@@ -24,6 +25,27 @@ export const LogoContainer = styled.div`
 export const VideoContainer = styled.div`
   ${FlexCenterStyle};
   ${WholeContainer};
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+`;
+
+export const SingleVideo = styled.div`
+  ${FlexCenterStyle};
+  position: relative;
+  width: ${({ theme }) => theme.windowWidth / 3}px;
+  height: ${({ theme }) => theme.windowHeight / 3}px;
+  mix-blend-mode: difference;
+
+  video {
+    margin: 0;
+  }
+
+  // video {
+  //   width: ${({ theme }) => Math.max(theme.windowWidth, (theme.windowHeight * 16) / 9) / 3}px;
+  //   height: ${({ theme }) => Math.max(theme.windowHeight, (theme.windowWidth * 9) / 16) / 3}px;
+  //   margin: 0;
+  // }
 `;
 
 export const VideoUpper = styled.div`
@@ -64,7 +86,8 @@ export const InformationBoard = styled.div`
   position: absolute;
   bottom: 2vw;
   left: 2vw;
-  background: black;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2vw);
   width: 33vw;
   ${FlexCenterStyle};
   flex-direction: column;

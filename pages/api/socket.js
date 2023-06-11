@@ -15,8 +15,15 @@ export default function handler(req, res) {
 
     io.on("connection", (socket) => {
       socket.on("handle-heart", (data) => {
-        console.log(data);
         socket.broadcast.emit("new-handle-heart", data);
+      });
+
+      socket.on("handle-livestream-number", (data) => {
+        socket.broadcast.emit("new-handle-livestream-number", data);
+      });
+
+      socket.on("handle-page-location", (data) => {
+        socket.broadcast.emit("new-handle-page-location", data);
       });
     });
   }
