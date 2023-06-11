@@ -10,9 +10,7 @@ export default function useSocketInit({ handleNewHeart }) {
   const socketInitializer = async () => {
     await fetch("/api/socket");
 
-    socket.current = io({
-      transports: ["websocket"],
-    });
+    socket.current = io();
 
     socket.current.on("connect", () => {
       console.log("socket connected");
