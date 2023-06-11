@@ -118,3 +118,17 @@ export const ArrayItem = styled.div`
   color: #fff0e8;
   height: 2vw;
 `;
+
+export const SingleHeart = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 700;
+  width: 40px;
+  cursor: pointer;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;

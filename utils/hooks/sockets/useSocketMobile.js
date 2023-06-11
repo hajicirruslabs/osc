@@ -1,4 +1,4 @@
-import { io } from "socket.io-client";
+import io from "socket.io-client";
 import { useEffect, useRef } from "react";
 
 export default function useSocketInit() {
@@ -8,15 +8,12 @@ export default function useSocketInit() {
   }, []);
 
   async function socketInitializer() {
-    const res = await fetch("/api/socket");
-    console.log(res);
+    await fetch("/api/socket");
 
-    socket.current = io("", {
-      secure: true,
-      reconnection: false,
+    socket.current = io({
       rejectUnauthorized: false,
+      withCredentials: true,
       transports: ["websocket"],
-      path: "/api/socket",
     });
 
     socket.current.on("connect", () => {

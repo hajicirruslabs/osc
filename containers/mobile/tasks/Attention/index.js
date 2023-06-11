@@ -62,7 +62,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
       y: e.clientY,
     };
 
-    const numbers = Math.floor(getRandom(1, getRandom(1, getRandom(1, 30))));
+    const numbers = Math.floor(getRandom(1, getRandom(1, getRandom(1, 20))));
     const toAddArray = new Array(numbers).fill(0).map((_, i) => ({
       id: Date.now() + i,
       startPos,
@@ -108,7 +108,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
           <p>Zone as directed by local airtender</p>
         </S.ButtonZone>
       </S.Container>
-      {heartEls.map((el) => (
+      {heartEls.slice(-200).map((el) => (
         <SingleHeartEl key={el.id} startPos={el.startPos} socket={socket} />
       ))}
       <Toast />
@@ -155,16 +155,26 @@ function SingleHeartEl({ startPos, socket }) {
     const opacity = progress > 0.9 ? 1 - (progress - 0.9) * 10 : 1;
     const scale = initialPos.scale + (targetPos.scale - initialPos.scale) * progress;
     setPos({ x, y, rotation, opacity, scale });
+  }, [STATIC_POS, progress]);
 
+  useEffect(() => {
+    const { initialPos, targetPos } = STATIC_POS;
     if (progress === 1) {
       try {
-        socket.current.emit("handle-heart", targetPos);
-        console.log(targetPos);
+        socket.current.emit("handle-heart", {
+          x: targetPos.x / windowWidth,
+          y: targetPos.y / windowHeight,
+          rotation: targetPos.rotation,
+          scale: targetPos.scale,
+          duration,
+          tension,
+          friction,
+        });
       } catch (e) {
         console.log(e);
       }
     }
-  }, [STATIC_POS, progress]);
+  }, [progress]);
 
   useSpring({
     from: { progress: 0 },

@@ -15,7 +15,7 @@
     "axios": "^1.4.0",
     "d3-ease": "^3.0.1",
     "loplat-ui": "^1.10.2-canary.14",
-    "next": "13.4.4",
+    "next": "13.0.2",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.9.0",
