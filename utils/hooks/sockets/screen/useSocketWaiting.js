@@ -1,7 +1,7 @@
 import io from "socket.io-client";
 import { useEffect, useRef } from "react";
 
-export default function useSocketInit({ pageURL }) {
+export default function useSocketInit({ handleNewPageLocation }) {
   const socket = useRef(null);
   useEffect(() => {
     socketInitializer();
@@ -18,17 +18,13 @@ export default function useSocketInit({ pageURL }) {
 
     socket.current.on("connect", () => {
       console.log("socket connected");
-      socket.current.emit("handle-page-location", pageURL);
     });
 
     socket.current.on("connect_error", (err) => {
       console.log(`connect_error due to ${err.message}`);
     });
 
-    socket.current.on("new-handle-screen-to-mobile-location-check-request", () => {
-      socket.current.emit("handle-page-location", pageURL);
-    });
-    console.log(socket.current);
+    socket.current.on("new-handle-page-location", handleNewPageLocation);
   }
 
   return socket;

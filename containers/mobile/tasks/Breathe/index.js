@@ -2,14 +2,10 @@ import * as S from "./styles";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import useSocket from "utils/hooks/sockets/useSocketMobile";
 import Header from "foundations/tasks/Header";
 
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const router = useRouter();
-  const socket = useSocket({
-    pageURL: "/screen/livestream",
-  });
 
   function handleBackClick() {
     router.push(`/home?userName=${userName}&osc=${osc}`);
@@ -18,26 +14,25 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   return (
     <S.Container>
       <Header
-        color={"#AC4141"}
+        color={"#649973"}
         data={{
-          name: "Transfuse Blood",
-          osc: 450,
+          name: "Breathe Life",
+          osc: 26,
         }}
         osc={osc}
         handleBackClick={handleBackClick}
       />
       <S.Text>
-        <h1>Not available in your area</h1>
-        <p>Requires immediate natural land access</p>
+        <h1>Coming soon!</h1>
+        <p>{`Your region’s collective growth efforts have made this option available`}</p>
       </S.Text>
 
       <S.ImageZone>
         <img src="/assets/images/plant.svg" />
       </S.ImageZone>
 
-      <S.ButtonZone>
-        <S.Button onClick={() => router.push(`/home?userName=${userName}&osc=${osc}`)}>{"Return Home"}</S.Button>
-        <p>Nature access in your region grows with OSC </p>
+      <S.ButtonZone onClick={() => router.push(`/home?userName=${userName}&osc=${osc}`)}>
+        <S.Button>{"Return Home"}</S.Button>
       </S.ButtonZone>
     </S.Container>
   );

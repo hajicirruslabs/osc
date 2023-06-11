@@ -1,9 +1,11 @@
 import * as S from "./styles";
 
 import { useState, useEffect, useMemo, useRef } from "react";
+import { useRouter } from "next/router";
+
+import useSocket from "utils/hooks/sockets/screen/useSocketLiveStream";
 import useResize from "utils/hooks/useResize";
 import useRandomInterval from "utils/hooks/useRandomInterval";
-import useSocket from "utils/hooks/sockets/screen/useSocketLiveStream";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
@@ -39,6 +41,7 @@ export default function Comp() {
   const socket = useSocket({
     handleNewHeart,
     handleNewLiveStreamNumber,
+    handleNewPageLocation,
   });
 
   const [heartEls, setHeartEls] = useState([]);
@@ -60,6 +63,34 @@ export default function Comp() {
     } else {
     }
   }
+
+  ///page management
+  const [mobileLocationCheckRequested, setMobileLocationCheckRequested] = useState(false);
+
+  const router = useRouter();
+  function handleNewPageLocation(data) {
+    setMobileLocationCheckRequested(false);
+    router.push(data);
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!socket.current) return;
+      socket.current.emit("handle-screen-to-mobile-location-check-request");
+      setMobileLocationCheckRequested(true);
+    }, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (mobileLocationCheckRequested) {
+      //wait for 10s, and then push to the waiting if no response
+      const timeout = setTimeout(() => {
+        router.push("/screen/waiting");
+      }, 10 * 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [mobileLocationCheckRequested]);
 
   return (
     <S.Container>

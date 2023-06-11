@@ -2,9 +2,10 @@ import * as S from "./styles";
 
 import { useState, useEffect } from "react";
 
+import useSocket from "utils/hooks/sockets/useSocketMobile";
+
 import Upper from "foundations/Upper";
 import { useRouter } from "next/router";
-
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
 
@@ -44,6 +45,11 @@ const ITEMS = [
 ];
 
 export default function Comp({ show, userName, osc }) {
+  ///socket todo: handle to /screen/waiting
+  const socket = useSocket({
+    pageURL: "/screen/main",
+  });
+
   const router = useRouter();
   const [tempOsc, setTempOsc] = useState(osc);
   const [oscStep, setOscStep] = useState(0);
@@ -100,7 +106,12 @@ export default function Comp({ show, userName, osc }) {
           <h2>Give to grow your social capital</h2>
           <S.List>
             {ITEMS.map((item, i) => (
-              <S.SingleItem key={i} onClick={() => router.push(`${item.url}?userName=${userName}&osc=${osc}`)}>
+              <S.SingleItem
+                key={i}
+                onClick={() => {
+                  router.push(`${item.url}?userName=${userName}&osc=${osc}`);
+                }}
+              >
                 <S.ItemLeft color={item.color}>
                   <img src={item.icon} />
                 </S.ItemLeft>

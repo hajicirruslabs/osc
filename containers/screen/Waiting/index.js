@@ -1,11 +1,24 @@
 import * as S from "./styles";
 
 import { useState, useEffect, Suspense } from "react";
+import { useRouter } from "next/router";
+
+import useSocket from "utils/hooks/sockets/screen/useSocketWaiting";
+
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Comp() {
+  const socket = useSocket({
+    handleNewPageLocation,
+  });
+  ///page management
+  const router = useRouter();
+  function handleNewPageLocation(data) {
+    router.push(data);
+  }
+
   return (
     <S.Container>
       <S.Background>

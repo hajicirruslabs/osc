@@ -25,6 +25,11 @@ export default function handler(req, res) {
       socket.on("handle-page-location", (data) => {
         socket.broadcast.emit("new-handle-page-location", data);
       });
+
+      //screen-to-mobile
+      socket.on("handle-screen-to-mobile-location-check-request", (data) => {
+        socket.broadcast.emit("new-handle-screen-to-mobile-location-check-request", data);
+      });
     });
   }
 

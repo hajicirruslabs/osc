@@ -18,7 +18,9 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min) + 
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const [second, setSecond] = useState(10);
   const router = useRouter();
-  const socket = useSocket();
+  const socket = useSocket({
+    pageURL: "/screen/livestream",
+  });
 
   const [displayOsc, setDisplayOsc] = useState(osc);
   useEffect(() => {

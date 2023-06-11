@@ -1,6 +1,8 @@
 import * as S from "./styles";
-
 import { useState, useEffect, Suspense } from "react";
+import { useRouter } from "next/router";
+
+import useSocket from "utils/hooks/sockets/screen/useSocketMain";
 
 const DATA = [
   {
@@ -42,6 +44,37 @@ const DATA = [
 const LIST = ["Total OSC given", "Top contributor", "Average care hours/day", "Seasons bloomed", "Time in flourish (in hrs)"];
 
 export default function Comp() {
+  const socket = useSocket({
+    handleNewPageLocation,
+  });
+  ///page management
+  const [mobileLocationCheckRequested, setMobileLocationCheckRequested] = useState(false);
+
+  const router = useRouter();
+  function handleNewPageLocation(data) {
+    setMobileLocationCheckRequested(false);
+    router.push(data);
+  }
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!socket.current) return;
+      socket.current.emit("handle-screen-to-mobile-location-check-request");
+      setMobileLocationCheckRequested(true);
+    }, 60 * 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (mobileLocationCheckRequested) {
+      //wait for 10s, and then push to the waiting if no response
+      const timeout = setTimeout(() => {
+        router.push("/screen/waiting");
+      }, 10 * 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [mobileLocationCheckRequested]);
+
   return (
     <S.Container>
       <S.LogoContainer>

@@ -88,6 +88,7 @@ export const InformationBoard = styled.div`
   left: 2vw;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(2vw);
+  border-radius: 1.4vw;
   width: 33vw;
   ${FlexCenterStyle};
   flex-direction: column;
