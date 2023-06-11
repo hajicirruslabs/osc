@@ -8,9 +8,16 @@ export default function useSocketInit() {
   }, []);
 
   async function socketInitializer() {
-    await fetch("/api/socket");
+    const res = await fetch("/api/socket");
+    console.log(res);
 
-    socket.current = io()
+    socket.current = io("", {
+      secure: true,
+      reconnection: false,
+      rejectUnauthorized: false,
+      transports: ["websocket"],
+      path: "/api/socket",
+    });
 
     socket.current.on("connect", () => {
       console.log("socket connected");
