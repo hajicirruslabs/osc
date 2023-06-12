@@ -1,12 +1,26 @@
 import * as S from "./styles";
 
 import { useState, useEffect, Suspense } from "react";
+import axios from "axios";
 
 import { useGLTF, OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader, useFrame } from "@react-three/fiber";
 
 export default function Comp({ show = false, handleNext }) {
   const [inputVal, setInputVal] = useState("");
+
+  async function handleClick() {
+    const res = await axios.post("/api/prisma/register-user", {
+      name: inputVal,
+      plant: "Salvia",
+    });
+
+    console.log(res.data);
+
+    handleNext({
+      name: inputVal,
+    });
+  }
 
   return (
     <S.Container show={show}>
@@ -41,7 +55,7 @@ export default function Comp({ show = false, handleNext }) {
 
         <S.InputContainer>
           <S.Input type="text" placeholder="Enter your name" value={inputVal} onChange={(e) => setInputVal(e.target.value)} />
-          <S.Button onClick={() => handleNext(inputVal)}>Log in</S.Button>
+          <S.Button onClick={handleClick}>Log in</S.Button>
         </S.InputContainer>
       </S.Main>
     </S.Container>

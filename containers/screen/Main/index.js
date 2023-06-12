@@ -112,7 +112,10 @@ export default function Comp() {
                 <h1>{datum.name}</h1>
                 <p>Current Status</p>
               </S.Title>
-              <S.SingleEl>{datum.totalOSC}</S.SingleEl>
+              <S.SingleEl>
+                <img src="/assets/screen/osc.svg" alt="osc" />
+                {datum.totalOSC}
+              </S.SingleEl>
               <S.SingleEl>{datum.topContributor}</S.SingleEl>
               <S.SingleEl>{datum.averageCare}</S.SingleEl>
               <S.SingleEl>{datum.seadonsBloomed}</S.SingleEl>

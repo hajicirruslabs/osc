@@ -32,6 +32,11 @@ export default function Page() {
 
   const router = useRouter();
 
+  function handleNext({ name }) {
+    setUserName(name);
+    router.push(`/home?userName=${name}`);
+  }
+
   return (
     <>
       <Head>
@@ -41,15 +46,7 @@ export default function Page() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
-        {mountLogin && (
-          <Login
-            show={state === "login"}
-            handleNext={(name) => {
-              setUserName(name);
-              router.push(`/home?userName=${name}`);
-            }}
-          />
-        )}
+        {mountLogin && <Login show={state === "login"} handleNext={handleNext} />}
         <Intro show={state === "intro"} />
       </BackgroundContainer>
     </>

@@ -51,9 +51,19 @@ export const SingleVideo = styled.div`
 export const VideoUpper = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
   position: absolute;
-  top: 2vw;
-  right: 2vw;
+  top: 0;
+  right: 0;
+  padding: 2vw;
+  border-radius: 0 0 0 1.5vw;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(2vw);
+`;
+
+export const VideoUpperUpper = styled.div`
+  display: flex;
+  align-items: center;
 
   img {
     width: 2vw;
@@ -61,7 +71,21 @@ export const VideoUpper = styled.div`
     margin-right: 0.5vw;
   }
   font-size: 1.5vw;
-  color: white;
+  color: #fff0e8;
+`;
+
+export const VideoUpperLower = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 0.7vw;
+  color: #fff0e8;
+  font-size: 2vw;
+  font-weight: bold;
+
+  img {
+    width: 2vw;
+    margin-right: 0.5vw;
+  }
 `;
 
 export const Live = styled.div`
@@ -84,12 +108,13 @@ export const Live = styled.div`
 
 export const InformationBoard = styled.div`
   position: absolute;
-  bottom: 2vw;
-  left: 2vw;
+  bottom: 0;
+  left: 0;
+  padding-bottom: 1vw;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(2vw);
-  border-radius: 1.4vw;
-  width: 33vw;
+  border-radius: 0 1.5vw 0 0;
+  width: 35vw;
   ${FlexCenterStyle};
   flex-direction: column;
 `;

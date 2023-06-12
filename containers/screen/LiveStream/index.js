@@ -78,7 +78,7 @@ export default function Comp() {
       if (!socket.current) return;
       socket.current.emit("handle-screen-to-mobile-location-check-request");
       setMobileLocationCheckRequested(true);
-    }, 60 * 1000);
+    }, 600 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -122,9 +122,16 @@ export default function Comp() {
       </S.VideoContainer>
 
       <S.VideoUpper>
-        <S.Live>Live</S.Live>
-        <img src="/assets/screen/Viewers.svg" />
-        {liveStream}
+        <S.VideoUpperUpper>
+          <S.Live>Live</S.Live>
+          <img src="/assets/screen/Viewers.svg" />
+          {liveStream}
+        </S.VideoUpperUpper>
+
+        <S.VideoUpperLower>
+          <img src="/assets/screen/osc.svg" alt="osc" />
+          543532
+        </S.VideoUpperLower>
       </S.VideoUpper>
 
       <S.InformationBoard>
@@ -194,7 +201,7 @@ function SingleHeartEl({ startPos }) {
   useSpring({
     from: { progress: 0 },
     to: { progress: 1 },
-    config: { duration: startPos.duration, tension: startPos.tension, friction: startPos.friction },
+    config: { duration: startPos.duration * 1.5, tension: startPos.tension, friction: startPos.friction },
     onChange: ({ value }) => {
       setProgress(value.progress);
     },

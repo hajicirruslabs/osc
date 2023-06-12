@@ -12,7 +12,7 @@ datasource db {
 
 model Plants{
     id Int @id @default(autoincrement())
-    name String
+    name String @unique
     img String
     ranking Int
     osc Int
@@ -28,7 +28,8 @@ model Plants{
 
 model User{
     id Int @id @default(autoincrement())
-    name String
-    plants Plants[]
+    name String @unique
+    plant Plants @relation(fields: [plantId], references: [id])
+    plantId Int
     osc Int
 }

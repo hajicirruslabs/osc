@@ -157,6 +157,11 @@ export const SingleEl = styled.div`
   ${FlexCenterStyle};
   border-radius: 0.8vw;
   margin: 0.3vw 0;
+
+  img {
+    margin-right: 0.5vw;
+    width: 1.4vw;
+  }
 `;
 
 export const FinalEl = styled.div`
