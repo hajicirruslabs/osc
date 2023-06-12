@@ -49,7 +49,7 @@ export const CurrencyContainer = styled.div`
 export const Table = styled.div`
   ${FlexCenterStyle};
   margin: 1vw;
-  margin-bottom: 1.5vw;
+  margin-bottom: 0.5vw;
 `;
 
 export const LeftColumn = styled.div`
@@ -69,9 +69,14 @@ export const TableTitle = styled.div`
   font-weight: semi-bold;
   margin: 0.5vw 0;
   height: 3vw;
+  font-size: 1.2vw;
   display: flex;
   align-items: center;
   border-bottom: 0.1vw solid #fff0e8;
+
+  img {
+    width: 1.8vw;
+  }
 `;
 
 export const Item = styled.div`
@@ -133,11 +138,29 @@ export const Title = styled.div`
   }
 `;
 
-export const Commercial = styled.div`
+export const Time = styled.div`
   width: 100%;
-  margin: 1vw 0;
-  height: 11vw;
-  background: rgba(0, 0, 0, 0.5);
+
+  padding: 0.5vw 0;
+  font-size: 2vw;
+  margin-bottom: 0.5vw;
+  // background: rgba(0, 0, 0, 0.5);
+
+  ${FlexCenterStyle};
+
+  div {
+    width: 10vw;
+
+    &:first-child {
+      text-align: left;
+      font-size: 1.2vw;
+    }
+
+    &:last-child {
+      text-align: right;
+      font-size: 1.8vw;
+    }
+  }
 `;
 
 export const QRContainer = styled.div`
@@ -229,9 +252,17 @@ export const BottomInfo = styled.div`
 export const NewsSection = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
+  position: relative;
+  width: 25vw;
+  height: 11vw;
 `;
 
 export const SingleNewsEl = styled.div`
+  position: absolute;
+  transform: translateY(${({ index }) => index * 5.5 - 3}vw);
+  opacity: ${({ index }) => (index === 0 || index === 1 ? 1 : 0)};
+  transition: all 1.5s;
+
   width: 25vw;
   height: 5vw;
   border-radius: 0.8vw;

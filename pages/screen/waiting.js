@@ -1,10 +1,11 @@
 import Head from "next/head";
-import { BackgroundContainer } from "styles/common";
-
-import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 
-import Waiting from "containers/screen/Waiting";
+import { BackgroundContainer } from "styles/common";
+import { useState, useEffect } from "react";
+
+const Waiting = dynamic(() => import("containers/screen/Waiting"), { ssr: false });
 
 export default function Page() {
   const router = useRouter();

@@ -30,7 +30,7 @@ export default function Comp() {
 
       <S.Left>
         <Currency />
-        {/* <S.Commercial></S.Commercial> */}
+
         <S.QRContainer>
           <S.QRWrapper>
             <img src="/assets/screen/QR.svg" alt="qr" />
@@ -56,26 +56,7 @@ export default function Comp() {
           ))}
         </S.RankingSection>
         <S.BottomInfo>
-          <S.NewsSection>
-            <S.SingleNewsEl>
-              <S.NewsLeft>
-                <h3>Urban Times</h3>
-                <p>Tropic areas urge urban workforce to channel inherenrt mindset into...</p>
-              </S.NewsLeft>
-              <S.NewsRight>
-                <img src="/assets/screen/News-1.png" alt="news" />
-              </S.NewsRight>
-            </S.SingleNewsEl>
-            <S.SingleNewsEl>
-              <S.NewsLeft>
-                <h3>FloraFeed</h3>
-                <p>Concerns grow as famed Rafflesia, supported by Jinhua, loses smell</p>
-              </S.NewsLeft>
-              <S.NewsRight>
-                <img src="/assets/screen/News-2.png" alt="news" />
-              </S.NewsRight>
-            </S.SingleNewsEl>
-          </S.NewsSection>
+          <NewsSection />
           <S.WeatherSection>
             <S.WeatherUpper>
               <S.WeatherLeft>
@@ -96,6 +77,77 @@ export default function Comp() {
       </S.Right>
       {/* <S.Footer>Powered by Jinhua Group Ltd.</S.Footer> */}
     </S.Container>
+  );
+}
+
+function Time() {
+  //time now in hh:mm:ss
+
+  const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDate(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <S.Time>
+      <div>{date.toLocaleDateString()}</div>
+      <div>{date.toLocaleTimeString()}</div>
+    </S.Time>
+  );
+}
+
+const NEWS_DATA = [
+  {
+    source: "Urban Times",
+    title: "Tropic areas urge urban workforce to channel inherent mindset into new...",
+    image: "/assets/screen/News-1.png",
+  },
+  {
+    source: "FloraFeed",
+    title: "Concerns grow as famed Rafflesia, supported by Jinhua, loses smell",
+    image: "/assets/screen/News-2.png",
+  },
+
+  {
+    source: "Seasons",
+    title: "Breath proven to transfer small amounts of human DNA to plants",
+    image: "/assets/screen/News-3.png",
+  },
+  {
+    source: "EmbReal",
+    title: "New hair extraction techniques cause fluctuation in urban exchange rates",
+    image: "/assets/screen/News-4.png",
+  },
+];
+
+function NewsSection() {
+  const [displayIdx, setDisplayIdx] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayIdx((prev) => (prev + 1) % NEWS_DATA.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <S.NewsSection>
+      {NEWS_DATA.map((datum, i) => (
+        <S.SingleNewsEl key={i} index={((displayIdx - i + NEWS_DATA.length) % NEWS_DATA.length) - 1}>
+          <S.NewsLeft>
+            <h3>{datum.source}</h3>
+            <p>{datum.title}</p>
+          </S.NewsLeft>
+          <S.NewsRight>
+            <img src={datum.image} alt="news" />
+          </S.NewsRight>
+        </S.SingleNewsEl>
+      ))}
+    </S.NewsSection>
   );
 }
 
@@ -178,6 +230,8 @@ function Currency() {
           </S.Item>
         </S.RightColumn>
       </S.Table>
+
+      <Time />
     </S.CurrencyContainer>
   );
 }
