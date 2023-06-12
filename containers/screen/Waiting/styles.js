@@ -373,19 +373,75 @@ export const WeatherRight = styled.div`
 `;
 export const WeatherLower = styled.div`
   ${FlexCenterStyle};
+  margin-top: 0.3vw;
   flex-direction: column;
+`;
 
+export const Image = styled.div`
+  width: 100%;
+  position: relative;
   img {
     width: 100%;
   }
+`;
 
-  p {
-    color: #ac4141;
-    text-align: center;
-    font-size: 0.7vw;
-    line-height: 0.95;
-    margin-top: 0.5vw;
+export const ImageWrapper = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0 !important;
+  background: transparent;
+  backdrop-filter: blur(2vw);
+  width: 100%;
+  height: 100%;
+
+  @keyframes reveal {
+    0% {
+      width: 100%;
+    }
+    50% {
+      width: 0;
+    }
+    100% {
+      width: 0;
+    }
   }
+
+  animation: reveal 5s infinite;
+`;
+
+export const Caution = styled.div`
+  color: #ac4141;
+  text-align: center;
+  font-size: 0.9vw;
+  line-height: 0.95;
+  margin-top: 0.78vw;
+
+  @keyframes caution-emphasise {
+    0% {
+      text-shadow: none;
+    }
+    7% {
+      transform: scale(1.1);
+      text-shadow: none;
+    }
+    14% {
+      transform: scale(1);
+      text-shadow: none;
+    }
+    20% {
+      opacity: 1;
+      transform: scale(1.1);
+    }
+    26% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    31% {
+      transform: scale(1.2);
+    }
+  }
+
+  animation: caution-emphasise 4s infinite;
 `;
 
 export const Footer = styled.div`

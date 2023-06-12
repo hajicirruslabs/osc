@@ -67,8 +67,12 @@ export default function Comp() {
                 <h2>sun showers</h2>
                 <h3>expect weather to affect circadian rhythm of resting plants</h3>
                 <S.WeatherLower>
-                  <img src="/assets/screen/graph.svg" alt="graph" />
-                  <p>caution! higher than average precipitation</p>
+                  <S.Image>
+                    <img src="/assets/screen/graph.svg" alt="graph" />
+                    <S.ImageWrapper />
+                  </S.Image>
+
+                  <S.Caution>caution! higher than average precipitation</S.Caution>
                 </S.WeatherLower>
               </S.WeatherRight>
             </S.WeatherUpper>
