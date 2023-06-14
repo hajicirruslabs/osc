@@ -7,7 +7,6 @@ import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Comp({ show }) {
-  console.log(show);
   return (
     <S.Container show={show}>
       <S.Background>

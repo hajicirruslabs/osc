@@ -1,4 +1,4 @@
-import { FlexCenterStyle, Inner, WholeContainer } from "styles/common";
+import { FlexCenterStyle, Inner, WholeContainer, Appear } from "styles/common";
 import * as C from "styles/common/color";
 import styled from "styled-components";
 
@@ -18,8 +18,8 @@ export const Container = styled.div`
 export const Text = styled.div`
   margin-left: 20px;
   width: calc(100% - 40px);
-  color: #a15326;
-  margin-top: 180px;
+  color: #649973;
+  margin-top: 160px;
 
   h1 {
     font-weight: 600;
@@ -35,12 +35,20 @@ export const Text = styled.div`
 `;
 
 export const ImageZone = styled.div`
-  width: calc(100% - 70px);
-  margin: 20px 35px;
+  width: calc(100% - 130px);
+  margin: 20px 65px;
 
   img {
     width: 100%;
   }
+`;
+
+export const Instruction = styled.div`
+  margin-left: 20px;
+  width: calc(100% - 40px);
+  color: #649973;
+  font-size: 16px;
+  font-style: italic;
 `;
 
 export const ButtonZone = styled.div`
@@ -50,6 +58,7 @@ export const ButtonZone = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   margin-bottom: 40px;
+  color: white;
 
   p {
     font-style: italic;
@@ -57,13 +66,14 @@ export const ButtonZone = styled.div`
     font-size: 10px;
     line-height: 18px;
     text-align: center;
-    color: #a15326;
+    // color: #a15326;
     margin-top: 2px;
   }
 `;
 
 export const Button = styled.div`
   width: 100%;
+  margin-top: 15px;
 
   border-radius: 10px;
   font-family: Newsreader;
@@ -73,9 +83,53 @@ export const Button = styled.div`
   line-height: 24px;
   ${FlexCenterStyle};
   height: 40px;
+  border: 1px solid transparent;
 
-  background: #a15326;
+  ${({ activated }) =>
+    activated
+      ? `
+  background: #649973;
   color: #fff;
+  `
+      : `
+    border: 1px solid #649973;
+    color: #649973;
+  `}
 
   transition: all 0.5s ease-in-out;
+`;
+
+export const ErrorContainer = styled.div`
+  ${WholeContainer};
+  position: fixed;
+  ${FlexCenterStyle};
+  z-index: 5;
+  background: red;
+  mix-blend-mode: multiply;
+`;
+
+export const SingleWarning = styled.div`
+  position: absolute;
+  width: 7rem;
+  z-index: 4;
+  mix-blend-mode: multiply;
+  animation: ${Appear} 0.5s ease-in-out;
+
+  img {
+    width: 100%;
+  }
+`;
+
+export const ThreeContianer = styled.div`
+  background: red !important;
+  z-index: 6;
+  ${WholeContainer};
+  ${FlexCenterStyle};
+  mix-blend-mode: none !important;
+`;
+
+export const ThreeText = styled.div`
+  font-size: 4rem;
+  font-family: Newsreader;
+  color: white;
 `;

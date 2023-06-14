@@ -32,7 +32,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
       </S.Text>
 
       <S.ImageZone>
-        <img src="/assets/images/plant.svg" />
+        <img src="/assets/tasks/blood-1.svg" />
       </S.ImageZone>
 
       <S.ButtonZone>
