@@ -109,6 +109,12 @@ export const SinglePlant = styled.div`
   height: 16vw;
   margin: 0 1vw;
   margin-bottom: 1vw;
+  position: relative;
+
+  video {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const Ranking = styled.div``;

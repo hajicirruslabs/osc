@@ -49,8 +49,8 @@ export default function Comp({ show = false, handleNext }) {
         </S.ModelContainer>
 
         <S.Text>
-          <p>Give yourself for its survival</p>
-          <p>and earn OSC.</p>
+          <p>Increase your OSC by showing</p>
+          <p> how much you care.</p>
         </S.Text>
 
         <S.InputContainer>

@@ -98,7 +98,7 @@ export default function Comp() {
         <S.Plants>
           {DATA.map((datum, i) => (
             <S.SinglePlant key={i}>
-              <img src={datum.img} alt="plant" />
+              {/* <video src={"/assets/videos/transparent_strawberry.mov"} alt="plant" /> */}
               <S.Ranking>
                 <img src={`/assets/screen/Ribbon-${datum.ranking}.svg`} alt="ranking" />
               </S.Ranking>
