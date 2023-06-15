@@ -6,9 +6,6 @@ import { useRouter } from "next/router";
 
 import Intro from "containers/mobile/Intro";
 import Login from "containers/mobile/Login";
-import Home from "containers/mobile/Home";
-
-import Upper from "foundations/Upper";
 
 export default function Page() {
   const [state, setState] = useState("intro");

@@ -1,11 +1,11 @@
 import LogoContainer from "./LogoContainer";
 import ModelContainer from "./ModelContainer";
 
-export default function Upper() {
+export default function Upper({ plant }) {
   return (
     <>
       <LogoContainer />
-      <ModelContainer />
+      <ModelContainer plant={plant} />
     </>
   );
 }

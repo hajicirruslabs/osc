@@ -44,7 +44,7 @@ const ITEMS = [
   },
 ];
 
-export default function Comp({ show, userName, osc }) {
+export default function Comp({ show, userName, osc, plant }) {
   ///socket todo: handle to /screen/waiting
   const socket = useSocket({
     pageURL: "/screen/main",
@@ -82,7 +82,7 @@ export default function Comp({ show, userName, osc }) {
 
   return (
     <S.Container show={show}>
-      <Upper />
+      <Upper plant={plant} />
       <S.Main>
         <S.TopSection>
           <h1>Hello, {userName}!</h1>
