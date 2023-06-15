@@ -10,7 +10,6 @@ export default async function handler(req, res) {
         name,
       },
     });
-    console.log(existing);
 
     if (!existing) {
       res.status(404).json({

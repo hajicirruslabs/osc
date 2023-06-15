@@ -37,7 +37,6 @@ export default function useRealTimeUpdate() {
   function handleRandomlyParams() {
     if (!realTimePlants || realTimePlants.length === 0) return;
     let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 150))));
 
     let rand = Math.random();
     let newAverageCare = rand ? Math.round(randomPlant.averageCare * getRandom(1 / 1.01, 1.01) * 100) / 100 : randomPlant.averageCare;

@@ -42,6 +42,7 @@ export const SingleVideo = styled.div`
 
   video {
     margin: 0;
+    opacity: 1;
   }
 
   // video {

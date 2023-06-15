@@ -32,3 +32,22 @@ export function useRetriveLocalPlants() {
 
   return plants;
 }
+
+export function useRetriveSinglePlant({ name }) {
+  const [plant, setPlant] = useState(null);
+
+  useEffect(() => {
+    retrivePlant();
+  }, [name]);
+
+  async function retrivePlant() {
+    try {
+      let res = await axios.post("/api/prisma/plants/retrive-single-plant", { name });
+      setPlant(res.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  return plant;
+}
