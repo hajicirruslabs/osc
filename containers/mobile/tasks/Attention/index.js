@@ -8,6 +8,8 @@ import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useRandomInterval from "utils/hooks/useRandomInterval";
 import useUpdateOSC from "utils/hooks/users/useUpdateOSC";
 
+import { useRetriveSinglePlant } from "@/utils/hooks/plants/useRetrivePlants";
+
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
 
@@ -16,7 +18,9 @@ import { toast, Toast } from "loplat-ui";
 const getRandom = (min, max) => Math.random() * (max - min) + min;
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min) + min);
 
-export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
+export default function Comp({ userName = "Cyan", plant, osc }) {
+  const plantInfo = useRetriveSinglePlant({ name: plant });
+  console.log(plantInfo);
   const [second, setSecond] = useState(10);
   const router = useRouter();
   const socket = useSocket({
@@ -118,14 +122,15 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
           <p>Those who pay the most attention have their names spoken to your plant</p>
         </S.Text>
         <S.LiveStream>
-          <p>{plantName}'s livestream</p>
+          <p>{plant}'s livestream</p>
           <S.LiveVideoEl>
             <S.VideoUpper>
               <S.Live>Live</S.Live>
               <img src="/assets/icons/viewers.svg" />
               {liveStream}
             </S.VideoUpper>
-            <video src="/assets/videos/vid.mp4" type="video/mp4" autoPlay="autoplay" loop playsInline muted preload="auto" controls={false} />
+
+            {plantInfo && <video src={`/assets/plants/` + plantInfo.liveVid} type="video/mp4" autoPlay="autoplay" loop playsInline muted preload="auto" controls={false} />}
           </S.LiveVideoEl>
         </S.LiveStream>
 

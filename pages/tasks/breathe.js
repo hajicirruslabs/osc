@@ -7,7 +7,7 @@ import Breathe from "containers/mobile/tasks/Breathe";
 
 export default function Page() {
   const router = useRouter();
-  const { userName, osc } = router.query;
+  const { userName, plant, osc } = router.query;
 
   return (
     <>

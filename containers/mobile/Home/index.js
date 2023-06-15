@@ -113,7 +113,7 @@ export default function Comp({ show, userName, osc, plant }) {
               <S.SingleItem
                 key={i}
                 onClick={() => {
-                  router.push(`${item.url}?userName=${userName}&osc=${osc}`);
+                  router.push(`${item.url}?userName=${userName}&osc=${osc}&plant=${plant}`);
                 }}
               >
                 <S.ItemLeft color={item.color}>

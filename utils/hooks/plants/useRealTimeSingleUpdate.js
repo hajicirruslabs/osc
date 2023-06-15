@@ -48,6 +48,7 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
 }
 
 export function useUpdateOSCFromArray({ realTimePlant }) {
+  console.log(realTimePlant);
   useEffect(() => {
     //compare oscarray with storedoscref.current
     if (!realTimePlant) return;
