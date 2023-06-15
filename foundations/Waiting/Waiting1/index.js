@@ -1,5 +1,6 @@
 import * as S from "./styles";
 
+import useRetrivePlants from "utils/hooks/plants/useRetrivePlants";
 import { useState, useEffect, Suspense } from "react";
 
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
@@ -7,6 +8,18 @@ import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Comp({ show }) {
+  const plants = useRetrivePlants();
+
+  const [displayOSC, setDisplayOSC] = useState(false);
+  //interval 2s
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayOSC((prev) => !prev);
+    }, 2000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <S.Container show={show}>
       <S.Background>
@@ -33,13 +46,31 @@ export default function Comp({ show }) {
       <S.Right>
         <h1>Top 9 Flourishing Regions of the Temperates</h1>
         <S.RankingSection>
-          {DUMMY_DATA.map((datum, i) => (
-            <S.SingleEl key={i} border={Math.random() < 0.3}>
+          {(plants || DUMMY_DATA).map((datum, i) => (
+            <S.SingleEl key={i} border={datum.isLocal || false}>
               {i < 3 && (
                 <S.Ranking big={i === 0}>
                   <img src={`/assets/screen/Ribbon-${i + 1}.svg`} alt="ranking" />
                 </S.Ranking>
               )}
+              {datum.liveVid && (
+                <video
+                  src={"/assets/plants/" + datum.liveVid}
+                  //autoplay
+                  type="video/mp4"
+                  autoPlay="autoplay"
+                  loop
+                  playsInline
+                  muted
+                  preload="auto"
+                  controls={false}
+                  alt="plant"
+                />
+              )}
+              <S.ElOSC>
+                {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
+                {displayOSC ? <b>{datum.osc || 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
+              </S.ElOSC>
             </S.SingleEl>
           ))}
         </S.RankingSection>
@@ -67,7 +98,6 @@ export default function Comp({ show }) {
           </S.WeatherSection>
         </S.BottomInfo>
       </S.Right>
-      {/* <S.Footer>Powered by Jinhua Group Ltd.</S.Footer> */}
     </S.Container>
   );
 }

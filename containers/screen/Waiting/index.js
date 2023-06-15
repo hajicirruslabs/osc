@@ -22,14 +22,14 @@ export default function Comp() {
 
   const [screenMode, setScreenMode] = useState(1);
 
-  useEffect(() => {
-    if (screenMode === 1) {
-      const timeout = setTimeout(() => {
-        setScreenMode(2);
-      }, 30 * 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [screenMode]);
+  // useEffect(() => {
+  //   if (screenMode === 1) {
+  //     const timeout = setTimeout(() => {
+  //       setScreenMode(2);
+  //     }, 30 * 1000);
+  //     return () => clearTimeout(timeout);
+  //   }
+  // }, [screenMode]);
 
   return (
     <>

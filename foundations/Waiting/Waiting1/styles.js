@@ -1,8 +1,6 @@
-import { FlexCenterStyle, Inner, WholeContainer } from "styles/common";
+import { FlexCenterStyle, Inner, WholeContainer, Appear } from "styles/common";
 import * as C from "styles/common/color";
 import styled from "styled-components";
-
-import { Appear } from "@/styles/common";
 
 export const Container = styled.div`
   ${FlexCenterStyle};
@@ -12,6 +10,9 @@ export const Container = styled.div`
 
   ${({ show }) => (show ? "opacity: 1;" : "opacity: 0;")}
   transition: opacity 0.5s ease-in-out;
+
+  animation: ${Appear} 0.5s ease-in-out;
+  animation-delay: 0.5s;
 `;
 export const Background = styled.div`
   ${FlexCenterStyle};
@@ -215,11 +216,48 @@ export const RankingSection = styled.div`
 export const SingleEl = styled.div`
   width: 18vw;
   height: 10.125vw;
-  margin: 0.3vw 0.5vw;
+  margin: 0.6vw 0.8vw;
   background: rgba(0, 0, 0, 0.5);
   position: relative;
 
-  ${({ border }) => `border: .4vw solid ${border ? "white" : "transparent"};`}
+  // ${({ border }) => `border: .4vw solid ${border ? "white" : "transparent"};`}
+
+  ${({ border }) => border && "box-shadow: inset 0 0 .6vw .4vw white, 0 0 1vw .5vw white;"}
+
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+`;
+
+export const ElOSC = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  ${FlexCenterStyle};
+  font-size: 1.5vw;
+  width: 100%;
+  backdrop-filter: blur(1vw);
+  transition: all 0.3s;
+  height: 2vw;
+
+  img {
+    width: 1.3vw;
+    margin-right: 0.5vw;
+    // animation: ${Appear} 0.3s;
+  }
+
+  b {
+    font-weight: normal;
+    // animation: ${Appear} 0.3s;
+  }
+  p {
+    font-size: 1.2vw;
+    // animation: ${Appear} 0.3s;
+  }
 `;
 
 export const Ranking = styled.div`

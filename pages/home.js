@@ -3,7 +3,7 @@ import { BackgroundContainer } from "styles/common";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import useRetriveOSC from "utils/hooks/useRetriveOSC";
+import useRetriveOSC from "utils/hooks/users/useRetriveOSC";
 
 import Home from "containers/mobile/Home";
 import axios from "axios";

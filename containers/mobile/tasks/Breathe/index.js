@@ -6,7 +6,7 @@ import Header from "foundations/tasks/Header";
 
 import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useResize from "utils/hooks/useResize";
-import useUpdateOSC from "utils/hooks/useUpdateOSC";
+import useUpdateOSC from "utils/hooks/users/useUpdateOSC";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
