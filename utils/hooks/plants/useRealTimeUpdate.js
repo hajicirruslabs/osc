@@ -1,13 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import useRandomInterval from "utils/hooks/useRandomInterval";
-import { useRetriveLocalPlants } from "utils/hooks/plants/useRetrivePlants";
+import useRetrivePlants from "utils/hooks/plants/useRetrivePlants";
 
-const getRandom = (min, max) => Math.random() * (max - min) + min;
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 export default function useRealTimeUpdate() {
-  const plants = useRetriveLocalPlants();
-  console.log(plants);
+  const plants = useRetrivePlants();
 
   const [realTimePlants, setRealTimePlants] = useState(plants);
   useEffect(() => {
@@ -23,48 +21,15 @@ export default function useRealTimeUpdate() {
       handleRandomlyAdjustOSC();
     },
     10,
-    3 * 1000
+    10 * 1000
   );
-
-  useRandomInterval(
-    () => {
-      handleRandomlyParams();
-    },
-    10,
-    1000
-  );
-
-  function handleRandomlyParams() {
-    if (!realTimePlants || realTimePlants.length === 0) return;
-    let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 150))));
-
-    let rand = Math.random();
-    let newAverageCare = rand ? Math.round(randomPlant.averageCare * getRandom(1 / 1.01, 1.01) * 100) / 100 : randomPlant.averageCare;
-    let newTime = !rand ? Math.round(randomPlant.time * getRandom(1 / 1.01, 1.01)) : randomPlant.time;
-
-    setRealTimePlants((prev) => {
-      let newPlants = prev.map((plant) => {
-        if (plant.id === randomPlant.id) {
-          return {
-            ...plant,
-            averageCare: newAverageCare,
-            time: newTime,
-          };
-        } else {
-          return plant;
-        }
-      });
-      return newPlants;
-    });
-  }
 
   function handleRandomlyAdjustOSC() {
+    ///
     if (!realTimePlants || realTimePlants.length === 0) return;
     let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 150))));
+    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, randomPlant.isLocal ? 100 : 400))));
     let newOSC = randomPlant.osc + randomAdjustment;
-    let newPerformance = randomPlant.totalPerformance + randomAdjustment;
     if (newOSC < 0) newOSC = 0;
 
     setRealTimePlants((prev) => {
@@ -73,7 +38,6 @@ export default function useRealTimeUpdate() {
           return {
             ...plant,
             osc: newOSC,
-            totalPerformance: newPerformance,
           };
         } else {
           return plant;
@@ -104,6 +68,10 @@ export function useUpdateOSCFromArray({ oscArray }) {
       handleUpdate(singlePlant);
     }
     storedOSCRef.current = oscArray;
+
+    return () => {
+      storedOSCRef.current = null;
+    };
   }, [oscArray]);
 
   async function handleUpdate(singlePlant) {

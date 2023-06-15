@@ -108,10 +108,11 @@ export const Plants = styled.div`
   ${FlexCenterStyle};
 `;
 export const SinglePlant = styled.div`
-  width: 16vw;
-  height: 16vw;
+  width: 20vw;
+  height: 11.25vw;
   margin: 0 1vw;
-  margin-bottom: 1vw;
+  margin-top: 2vw;
+  margin-bottom: 2.8vw;
   position: relative;
 
   video {
@@ -120,7 +121,14 @@ export const SinglePlant = styled.div`
   }
 `;
 
-export const Ranking = styled.div``;
+export const Ranking = styled.div`
+  position: absolute;
+  top: -2.5vw;
+  left: -2.5vw;
+  ${FlexCenterStyle};
+  width: 5vw;
+  height: 5vw;
+`;
 
 export const List = styled.div`
   ${FlexCenterStyle};

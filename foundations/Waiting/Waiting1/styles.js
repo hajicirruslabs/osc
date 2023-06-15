@@ -11,7 +11,7 @@ export const Container = styled.div`
   ${({ show }) => (show ? "opacity: 1;" : "opacity: 0;")}
   transition: opacity 0.5s ease-in-out;
 
-  animation: ${Appear} 0.5s ease-in-out;
+  animation: ${Appear} 0.5s ease-in-out both;
   animation-delay: 0.5s;
 `;
 export const Background = styled.div`

@@ -16,3 +16,19 @@ export default function useRetrivePlants() {
 
   return plants;
 }
+
+export function useRetriveLocalPlants() {
+  //update latest osc
+  const [plants, setPlants] = useState(null);
+  useEffect(() => {
+    retrivePlant();
+  }, []);
+  async function retrivePlant() {
+    let res = await axios.get("/api/prisma/plants/retrive-local-plants");
+    let allPlants = res.data.sort((a, b) => b.osc - a.osc);
+
+    setPlants(allPlants);
+  }
+
+  return plants;
+}

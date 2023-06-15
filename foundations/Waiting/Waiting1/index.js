@@ -1,24 +1,25 @@
 import * as S from "./styles";
 
-import useRetrivePlants from "utils/hooks/plants/useRetrivePlants";
+import useRealTimeUpdate from "utils/hooks/plants/useRealTimeUpdate";
 import { useState, useEffect, Suspense } from "react";
 
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
+import useRandomInterval from "@/utils/hooks/useRandomInterval";
 
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 export default function Comp({ show }) {
-  const plants = useRetrivePlants();
+  const plants = useRealTimeUpdate();
 
-  const [displayOSC, setDisplayOSC] = useState(false);
+  const [displayOSC, setDisplayOSC] = useState(true);
   //interval 2s
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDisplayOSC((prev) => !prev);
-    }, 2000);
-    return () => clearInterval(interval);
-  }, []);
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setDisplayOSC((prev) => !prev);
+  //   }, 4000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <S.Container show={show}>
@@ -174,6 +175,18 @@ function NewsSection() {
 }
 
 function Currency() {
+  // const [a, setA] = useState(1.5);
+  // const [b, setB] = useState(90);
+  // const [c, setC] = useState(45);
+  // const [d, setD] = useState(18);
+  // const [e, setE] = useState(16);
+
+  // useRandomInterval{
+  //   () => {
+  //     const rand = Math.random();
+  //     if (rand < 0.2) setA ( a => a + getRandom)
+  // }
+
   return (
     <S.CurrencyContainer>
       <S.Title>

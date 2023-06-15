@@ -3,16 +3,17 @@ import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/router";
 
 import useSocket from "utils/hooks/sockets/screen/useSocketMain";
+import useRealTimeUpdate from "@/utils/hooks/plants/useRealTimeLocalUpdate";
 
 const DATA = [
   {
     img: "",
     ranking: 3,
     name: "Alocasia",
-    totalOSC: 34610,
+    osc: 34610,
     topContributor: "Kimberly W.",
     averageCare: 4.34,
-    seadonsBloomed: 3,
+    seasonsBloomed: 3,
     time: 437,
     totalPerformance: 35781,
   },
@@ -20,10 +21,10 @@ const DATA = [
     img: "",
     ranking: 1,
     name: "Alocasia",
-    totalOSC: 87764,
+    osc: 87764,
     topContributor: "Wessen L.",
     averageCare: 3.09,
-    seadonsBloomed: 3,
+    seasonsBloomed: 3,
     time: 674,
     totalPerformance: 89047,
   },
@@ -32,10 +33,10 @@ const DATA = [
     img: "",
     ranking: 2,
     name: "Dendrobium",
-    totalOSC: 56993,
+    osc: 56993,
     topContributor: "June P.",
     averageCare: 16.2,
-    seadonsBloomed: 13,
+    seasonsBloomed: 13,
     time: 132,
     totalPerformance: 58845,
   },
@@ -44,6 +45,9 @@ const DATA = [
 const LIST = ["Total OSC given", "Top contributor", "Average care hours/day", "Seasons bloomed", "Time in flourish (in hrs)"];
 
 export default function Comp() {
+  const plants = useRealTimeUpdate();
+  console.log(plants);
+
   const socket = useSocket({
     handleNewPageLocation,
   });
@@ -96,9 +100,22 @@ export default function Comp() {
       <S.Right>
         <h1>Local Flourishing Statistics</h1>
         <S.Plants>
-          {DATA.map((datum, i) => (
+          {(plants || DATA).map((datum, i) => (
             <S.SinglePlant key={i}>
-              {/* <video src={"/assets/videos/transparent_strawberry.mov"} alt="plant" /> */}
+              {datum.liveVid && (
+                <video
+                  src={"/assets/plants/" + datum.liveVid}
+                  //autoplay
+                  type="video/mp4"
+                  autoPlay="autoplay"
+                  loop
+                  playsInline
+                  muted
+                  preload="auto"
+                  controls={false}
+                  alt="plant"
+                />
+              )}
               <S.Ranking>
                 <img src={`/assets/screen/Ribbon-${datum.ranking}.svg`} alt="ranking" />
               </S.Ranking>
@@ -106,7 +123,7 @@ export default function Comp() {
           ))}
         </S.Plants>
         <S.List>
-          {DATA.map((datum, i) => (
+          {(plants || DATA).map((datum, i) => (
             <S.SingleColumn key={i}>
               <S.Title>
                 <h1>{datum.name}</h1>
@@ -114,18 +131,18 @@ export default function Comp() {
               </S.Title>
               <S.SingleEl>
                 <img src="/assets/screen/osc.svg" alt="osc" />
-                {datum.totalOSC}
+                {datum.osc}
               </S.SingleEl>
               <S.SingleEl>{datum.topContributor}</S.SingleEl>
               <S.SingleEl>{datum.averageCare}</S.SingleEl>
-              <S.SingleEl>{datum.seadonsBloomed}</S.SingleEl>
+              <S.SingleEl>{datum.seasonsBloomed}</S.SingleEl>
               <S.SingleEl>{datum.time}</S.SingleEl>
               <S.FinalEl>{datum.totalPerformance}</S.FinalEl>
             </S.SingleColumn>
           ))}
         </S.List>
       </S.Right>
-      <S.Footer>Powered by Jinhua Group Ltd.</S.Footer>
+      {/* <S.Footer>Powered by Jinhua Group Ltd.</S.Footer> */}
     </S.Container>
   );
 }
