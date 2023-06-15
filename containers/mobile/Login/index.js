@@ -3,8 +3,7 @@ import * as S from "./styles";
 import { useState, useEffect, Suspense, useMemo } from "react";
 import axios from "axios";
 
-import { useGLTF, OrbitControls } from "@react-three/drei";
-import { Canvas, useLoader, useFrame } from "@react-three/fiber";
+import Loading from "foundations/Loading";
 
 const DUMMY_PLANT = {
   id: 1,
@@ -43,22 +42,19 @@ export default function Comp({ show = false, handleNext }) {
     //add ranking info on rallplants
     allPlants = allPlants.map((plant, i) => ({ ...plant, ranking: i + 1 }));
     const localPlants = allPlants.filter((plant) => plant.isLocal);
-    console.log(localPlants);
     //localplants ranking
     setPlant(getRandomFromArray(localPlants));
   }
 
+  const [loading, setLoading] = useState(false);
+
   async function handleClick() {
+    setLoading(true);
     const res = await axios.post("/api/prisma/users/register-user", {
       name: inputVal,
       plant: plant.name,
     });
-
-    console.log(res.data);
-
-    handleNext({
-      name: inputVal,
-    });
+    handleNext(res.data);
   }
 
   return (
@@ -89,13 +85,7 @@ export default function Comp({ show = false, handleNext }) {
           <S.Button onClick={handleClick}>Log in</S.Button>
         </S.InputContainer>
       </S.Main>
+      <Loading loading={loading} />
     </S.Container>
   );
-}
-
-function Model() {
-  //usegltf
-  const gltf = useGLTF("/assets/model/3d_plant.glb", true);
-
-  return <primitive object={gltf.scene} dispose={null} scale={[20, 20, 20]} rotation={[0, Math.PI / 2, 0]} />;
 }

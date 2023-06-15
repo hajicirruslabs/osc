@@ -32,9 +32,9 @@ export default function Page() {
 
   const router = useRouter();
 
-  function handleNext({ name }) {
+  function handleNext({ name, osc, plant }) {
     setUserName(name);
-    router.push(`/home?userName=${name}`);
+    router.push(`/home?userName=${name}&osc=${osc}&plant=${plant}`);
   }
 
   return (

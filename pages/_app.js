@@ -254,8 +254,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
       </Head>
-
-      {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-2D4T5PS78F" strategy="afterInteractive" />
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-2D4T5PS78F" strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -263,7 +262,7 @@ function MyApp({ Component, pageProps }) {
           gtag('js', new Date());
           gtag('config', 'G-2D4T5PS78F');
         `}
-      </Script> */}
+      </Script>
 
       <GlobalStyle />
       <ThemeProvider theme={{ windowWidth, windowHeight }}>

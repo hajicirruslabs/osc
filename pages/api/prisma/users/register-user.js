@@ -33,12 +33,14 @@ export default async function handler(req, res) {
         },
       });
       res.status(200).json({
+        name,
         osc: 310,
         plant,
         type: "created",
       });
     } else {
       res.status(200).json({
+        name,
         osc: existing.osc,
         plant: existing.plant,
         type: "existing",
