@@ -6,6 +6,7 @@ export const Container = styled.div`
   ${Inner};
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-between;
   overflow-y: scroll;
 
@@ -14,7 +15,6 @@ export const Container = styled.div`
 `;
 
 export const Text = styled.div`
-  margin-left: 20px;
   width: calc(100% - 40px);
   color: #ac4141;
   margin-top: 180px;
@@ -33,7 +33,7 @@ export const Text = styled.div`
 `;
 
 export const ImageZone = styled.div`
-  width: calc(100% - 70px);
+  width: ${({ theme }) => Math.min(theme.windowWidth * 0.5, 400)}px;
   margin: 20px 35px;
 
   img {
@@ -43,7 +43,6 @@ export const ImageZone = styled.div`
 
 export const ButtonZone = styled.div`
   width: calc(100% - 70px);
-  margin-left: 35px;
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;

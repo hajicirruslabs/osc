@@ -21,7 +21,7 @@ export default function Comp({ show }) {
 
         <S.QRContainer>
           <S.QRWrapper>
-            <img src="/assets/screen/QR.svg" alt="qr" />
+            <img src="/assets/screen/qr.svg" alt="qr" />
           </S.QRWrapper>
 
           <S.Text>

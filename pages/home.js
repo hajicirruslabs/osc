@@ -16,7 +16,6 @@ export default function Page() {
         <title>OSC: Home</title>
         <meta name="description" content="OSC HOme" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
         <Home show={true} userName={userName || "Cyan"} osc={parseFloat(osc) || 310} />

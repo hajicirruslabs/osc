@@ -20,7 +20,7 @@ export default function Comp() {
     router.push(data);
   }
 
-  const [screenMode, setScreenMode] = useState(2);
+  const [screenMode, setScreenMode] = useState(1);
 
   useEffect(() => {
     if (screenMode === 1) {

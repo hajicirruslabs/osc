@@ -9,6 +9,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   overflow-y: scroll;
 
   min-height: ${({ theme }) => theme.windowHeight}px;
@@ -16,7 +17,6 @@ export const Container = styled.div`
 `;
 
 export const Text = styled.div`
-  margin-left: 20px;
   width: calc(100% - 40px);
   color: #649973;
   margin-top: 160px;
@@ -35,7 +35,7 @@ export const Text = styled.div`
 `;
 
 export const ImageZone = styled.div`
-  width: calc(100% - 130px);
+  width: ${({ theme }) => Math.min(theme.windowWidth * 0.5, 300)}px;
   margin: 20px 65px;
 
   img {
@@ -44,7 +44,6 @@ export const ImageZone = styled.div`
 `;
 
 export const Instruction = styled.div`
-  margin-left: 20px;
   width: calc(100% - 40px);
   color: #649973;
   font-size: 16px;
@@ -53,7 +52,6 @@ export const Instruction = styled.div`
 
 export const ButtonZone = styled.div`
   width: calc(100% - 70px);
-  margin-left: 35px;
   position: relative;
   ${FlexCenterStyle};
   flex-direction: column;

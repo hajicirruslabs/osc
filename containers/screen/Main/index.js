@@ -88,7 +88,7 @@ export default function Comp() {
         </S.LeftUpper>
         <S.LeftList>
           {LIST.map((item, index) => (
-            <S.LeftListItem>{item}</S.LeftListItem>
+            <S.LeftListItem key={index}>{item}</S.LeftListItem>
           ))}
           <S.LeftListBottom>Total Performance</S.LeftListBottom>
         </S.LeftList>

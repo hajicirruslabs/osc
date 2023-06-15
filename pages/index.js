@@ -43,7 +43,6 @@ export default function Page() {
         <title>Organic Social Capital</title>
         <meta name="description" content="OSC: For a flourishing life" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
         {mountLogin && <Login show={state === "login"} handleNext={handleNext} />}

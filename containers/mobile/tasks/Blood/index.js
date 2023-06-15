@@ -8,7 +8,7 @@ import Header from "foundations/tasks/Header";
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const router = useRouter();
   const socket = useSocket({
-    pageURL: "/screen/livestream",
+    pageURL: "/screen/coming-soon",
   });
 
   function handleBackClick() {

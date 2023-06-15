@@ -125,7 +125,6 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
           <S.Button completed={second === 0} onClick={() => second === 0 && router.push(`/home?userName=${userName}&osc=${osc + 15}`)}>
             {second === 0 ? "Complete" : `Keep watching for ${second}s`}
           </S.Button>
-          <p>Zone as directed by local airtender</p>
         </S.ButtonZone>
       </S.Container>
       {heartEls.slice(-200).map((el) => (

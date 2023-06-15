@@ -17,7 +17,6 @@ export default function Page() {
         <title>OSC: Screen</title>
         <meta name="description" content="OSC Screen" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
       <BackgroundContainer>
         <ComingSoon />

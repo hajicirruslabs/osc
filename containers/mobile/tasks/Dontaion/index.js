@@ -4,8 +4,13 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import Header from "foundations/tasks/Header";
 
+import useSocket from "utils/hooks/sockets/useSocketMobile";
+
 export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
   const router = useRouter();
+  const socket = useSocket({
+    pageURL: "/screen/coming-soon",
+  });
 
   function handleBackClick() {
     router.push(`/home?userName=${userName}&osc=${osc}`);

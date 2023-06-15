@@ -244,11 +244,18 @@ function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <title>Internetinental: Web-based Artworks around Interconnectivity</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <title>OSC || Organic Social Capital</title>
+        <meta name="title" content={"OSC"} />
+
+        <meta name="description" content="OSC || Organic Social Capital" />
+        <meta name="viewport" content="initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+        <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
       </Head>
 
-      <Script src="https://www.googletagmanager.com/gtag/js?id=G-2D4T5PS78F" strategy="afterInteractive" />
+      {/* <Script src="https://www.googletagmanager.com/gtag/js?id=G-2D4T5PS78F" strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">
         {`
           window.dataLayer = window.dataLayer || [];
@@ -256,7 +263,7 @@ function MyApp({ Component, pageProps }) {
           gtag('js', new Date());
           gtag('config', 'G-2D4T5PS78F');
         `}
-      </Script>
+      </Script> */}
 
       <GlobalStyle />
       <ThemeProvider theme={{ windowWidth, windowHeight }}>

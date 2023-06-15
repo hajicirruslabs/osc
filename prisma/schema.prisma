@@ -13,14 +13,18 @@ datasource db {
 model Plants{
     id Int @id @default(autoincrement())
     name String @unique
-    img String
-    ranking Int
     osc Int
+    localVids String[]
+    liveVid String?
+    placeholderImg String?
+    ranking Int?
     topContributor String?
     averageCare Float?
     seasonsBloomed Int?
     time Int?
     totalPerformance Int?
+    isLocal Boolean?
+
 
     users User[]
 }

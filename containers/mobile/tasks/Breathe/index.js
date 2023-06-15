@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import Header from "foundations/tasks/Header";
 
+import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useResize from "utils/hooks/useResize";
 
 import { toast, Toast } from "loplat-ui";
@@ -128,7 +129,7 @@ function ErrorComponent({ errorState, setErrorState, setState }) {
   function handleStateOne() {
     const interval = setInterval(() => {
       addWarningLocations();
-    }, 300);
+    }, 150);
     const timeout = setTimeout(() => {
       setErrorState(2);
       clearInterval(interval);
