@@ -24,6 +24,26 @@ right: 10px;
     width: 100%;
     height: 100%;
   }
+
+  // animation: scale-move 1.8s infinite;
+
+  @keyframes scale-move {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.09);
+    }
+    50% {
+      transform: scale(1.09);
+    }
+    80% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 
 export const OverlayText = styled.div`

@@ -1,4 +1,4 @@
-import { FlexCenterStyle, Inner, WholeContainer } from "styles/common";
+import { FlexCenterStyle, Inner, Appear } from "styles/common";
 import * as C from "styles/common/color";
 import styled from "styled-components";
 
@@ -19,6 +19,9 @@ export const Container = styled.div`
   `}
 
   transition: opacity 0.5s ease-in-out;
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 0.5s;
 `;
 
 export const Main = styled.div`
@@ -57,11 +60,34 @@ export const BalanceSection = styled.div`
   position: relative;
   height: 500px !important;
   margin: -80px 0;
-  width: 400px;
-  margin-left: ${({ theme }) => (Math.min(theme.windowWidth, 768) - 400) / 2}px;
+  width: 500px;
+  margin-left: ${({ theme }) => (Math.min(theme.windowWidth, 768) - 500) / 2}px;
   ${FlexCenterStyle};
   overflow-x: hidden;
   z-index: 0;
+
+  animation: image-rotate-slightly 3s infinite;
+
+  @keyframes image-rotate-slightly {
+    0% {
+      transform: rotate(0deg);
+    }
+    20% {
+      transform: rotate(5deg);
+    }
+    40% {
+      transform: rotate(0deg);
+    }
+    60% {
+      transform: rotate(-5deg);
+    }
+    80% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 `;
 
 export const Balance = styled.div`
@@ -75,6 +101,9 @@ export const Balance = styled.div`
   background: ${C.WHITE};
   z-index: 1;
   box-shadow: 4px 5px 8px 1px rgba(130, 57, 16, 0.37);
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 1.3s;
 `;
 
 export const SurroundingCirlces = styled.div`
@@ -89,6 +118,27 @@ export const SurroundingCirlces = styled.div`
   right: 0;
   margin: auto;
   border-radius: 50%;
+
+  animation: ${Appear} 1s ease-in-out both, scale-move 1.8s infinite;
+  animation-delay: ${({ idx }) => idx * 0.14 + 1.3}s;
+
+  @keyframes scale-move {
+    0% {
+      transform: scale(1);
+    }
+    30% {
+      transform: scale(1.09);
+    }
+    50% {
+      transform: scale(1.09);
+    }
+    80% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
 `;
 
 export const BalanceUpper = styled.div`

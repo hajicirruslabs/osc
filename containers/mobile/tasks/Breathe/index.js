@@ -50,7 +50,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
 
   function handleButtonClick() {
     if (state !== 2) return;
-    router.push(`/home?userName=${userName}&osc=${osc + (triggerUpdate ? 26 : 0)}`);
+    router.push(`/home?userName=${userName}&osc=${osc + (state === 2 ? 26 : 0)}`);
   }
 
   const [secCountDown, setSecCountDown] = useState(25);
@@ -71,10 +71,10 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
 
   useSpring({
     from: { progress: 0 },
-    to: { progress: triggerUpdate ? 1 : 0 },
+    to: { progress: state === 2 ? 1 : 0 },
     config: { duration: 3000, easing: easings.easeCubicOut },
     onChange: ({ value }) => {
-      setDisplayOsc(osc + 15 * value.progress);
+      setDisplayOsc(osc + 26 * value.progress);
     },
     onRest: () => {},
   });
@@ -84,7 +84,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
       setState(1);
     }
     if (state === 2) {
-      toast.success("25 OSC added", 2000);
+      toast.success("26 OSC added", 2000);
       setTriggerUpdate(true);
     }
   }, [state, secCountDown]);
@@ -100,7 +100,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   }, [state]);
 
   useUpdateOSC({
-    updateOSC: osc + 25,
+    updateOSC: osc + 26,
     triggerUpdate,
     setTriggerUpdate,
     name: userName,

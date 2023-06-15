@@ -14,6 +14,9 @@ export const Container = styled.div`
 
   min-height: ${({ theme }) => theme.windowHeight}px;
   transition: opacity 0.5s ease-in-out;
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 0.5s;
 `;
 
 export const Text = styled.div`

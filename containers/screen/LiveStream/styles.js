@@ -8,6 +8,9 @@ export const Container = styled.div`
   ${FlexCenterStyle};
   ${WholeContainer};
   transition: 0.5s;
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 0.5s;
 `;
 
 export const LogoContainer = styled.div`

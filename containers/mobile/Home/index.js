@@ -52,6 +52,10 @@ export default function Comp({ show, userName, osc, plant }) {
 
   const router = useRouter();
   const [tempOsc, setTempOsc] = useState(osc);
+
+  useEffect(() => {
+    setTempOsc(osc);
+  }, [osc]);
   const [oscStep, setOscStep] = useState(0);
 
   useSpring({

@@ -9,6 +9,9 @@ export const Container = styled.div`
   ${WholeContainer};
   flex-direction: row !important;
   ${FlexCenterStyle};
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 0.5s;
 `;
 
 export const LogoContainer = styled.div`

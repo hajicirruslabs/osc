@@ -9,6 +9,9 @@ export const Container = styled.div`
   ${WholeContainer};
   color: #fff0e8;
   font-family: Poppins;
+
+  animation: ${Appear} 1s ease-in-out both;
+  animation-delay: 0.5s;
 `;
 export const Background = styled.div`
   ${FlexCenterStyle};
