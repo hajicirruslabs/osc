@@ -7,7 +7,7 @@ import Dontaion from "containers/mobile/tasks/Dontaion";
 
 export default function Page() {
   const router = useRouter();
-  const { userName, osc } = router.query;
+  const { userName, plant, osc } = router.query;
 
   return (
     <>
@@ -17,7 +17,7 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </Head>
       <TaskBackgroundContainer color={"#FFF0E8"}>
-        <Dontaion userName={userName} osc={parseFloat(osc)} />
+        <Dontaion userName={userName} osc={parseFloat(osc)} plant={plant} />
       </TaskBackgroundContainer>
     </>
   );

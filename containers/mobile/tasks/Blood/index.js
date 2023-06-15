@@ -5,14 +5,14 @@ import { useRouter } from "next/router";
 import useSocket from "utils/hooks/sockets/useSocketMobile";
 import Header from "foundations/tasks/Header";
 
-export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
+export default function Comp({ userName = "Cyan", plant, osc }) {
   const router = useRouter();
   const socket = useSocket({
     pageURL: "/screen/coming-soon",
   });
 
   function handleBackClick() {
-    router.push(`/home?userName=${userName}&osc=${osc}`);
+    router.push(`/home?userName=${userName}&osc=${osc}&plant=${plant}`);
   }
 
   return (
@@ -36,7 +36,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
       </S.ImageZone>
 
       <S.ButtonZone>
-        <S.Button onClick={() => router.push(`/home?userName=${userName}&osc=${osc}`)}>{"Return Home"}</S.Button>
+        <S.Button onClick={() => router.push(`/home?userName=${userName}&osc=${osc}&plant=${plant}`)}>{"Return Home"}</S.Button>
         <p>Nature access in your region grows with OSC </p>
       </S.ButtonZone>
     </S.Container>

@@ -8,6 +8,8 @@ export const LoadingContainer = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   ${WholeContainer};
+  width: ${({ theme }) => theme.windowWidth}px;
+  height: ${({ theme }) => theme.windowHeight}px;
   z-index: 1000;
   pointer-events: none;
 

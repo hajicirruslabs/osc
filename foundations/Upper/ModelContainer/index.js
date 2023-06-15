@@ -8,13 +8,17 @@ export default function Comp({ plant, isLarge = false }) {
   //retrive plant info
   useEffect(() => {
     retrivePlant();
-  }, []);
+  }, [plant]);
 
   const [plantInfo, setPlantInfo] = useState(null);
 
   async function retrivePlant() {
     let res = await axios.get("/api/prisma/plants/retrive-all-plants");
-    let targetPlant = res.data.find((p) => p.name === plant);
+
+    //order by ranking
+    let allPlants = res.data.sort((a, b) => b.osc - a.osc);
+    allPlants = allPlants.map((plant, i) => ({ ...plant, ranking: i + 1 }));
+    let targetPlant = allPlants.find((p) => p.name === plant);
     setPlantInfo(targetPlant);
   }
 

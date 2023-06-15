@@ -13,14 +13,13 @@ export const Container = styled.div`
 
   animation: ${Appear} 1s ease-in-out both;
   animation-delay: 0.5s;
+  background: linear-gradient(118.05deg, #9a2901 5.83%, #e25b2d 42.75%, #f0b6ab 90.92%);
 `;
 
 export const Background = styled.div`
   ${FlexCenterStyle};
   ${WholeContainer};
   mix-blend-mode: multiply;
-  z-index: 0;
-  // opacity: 0.7;
 
   img {
     width: 120%;

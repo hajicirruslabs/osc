@@ -13,6 +13,7 @@ import { useRetriveSinglePlant } from "@/utils/hooks/plants/useRetrivePlants";
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
 
+import axios from "axios";
 import { toast, Toast } from "loplat-ui";
 
 const getRandom = (min, max) => Math.random() * (max - min) + min;
@@ -20,7 +21,6 @@ const getRandomInt = (min, max) => Math.floor(Math.random() * (max + 1 - min) + 
 
 export default function Comp({ userName = "Cyan", plant, osc }) {
   const plantInfo = useRetriveSinglePlant({ name: plant });
-  console.log(plantInfo);
   const [second, setSecond] = useState(10);
   const router = useRouter();
   const socket = useSocket({
@@ -47,8 +47,16 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
     if (second === 0) {
       setTriggerUpdate(true);
       toast.success("15 OSC added", 2000);
+      updatePlantOSC();
     }
   }, [second]);
+
+  async function updatePlantOSC() {
+    await axios.post("/api/prisma/plants/update-plant-osc", {
+      name: plant,
+      osc: plantInfo.osc + 15,
+    });
+  }
 
   useUpdateOSC({
     updateOSC: osc + 15,
@@ -59,7 +67,7 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
 
   //back click
   function handleBackClick() {
-    router.push(`/home?userName=${userName}&osc=${osc + (second === 0 ? 15 : 0)}`);
+    router.push(`/home?userName=${userName}&osc=${osc + (second === 0 ? 15 : 0)}&plant=${plant}`);
   }
 
   //inteval
@@ -137,7 +145,7 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
         <S.TapZone onClick={onTap}>Tap to show your love</S.TapZone>
 
         <S.ButtonZone>
-          <S.Button completed={second === 0} onClick={() => second === 0 && router.push(`/home?userName=${userName}&osc=${osc + 15}`)}>
+          <S.Button completed={second === 0} onClick={() => second === 0 && router.push(`/home?userName=${userName}&osc=${osc + 15}&plant=${plant}`)}>
             {second === 0 ? "Complete" : `Keep watching for ${second}s`}
           </S.Button>
         </S.ButtonZone>

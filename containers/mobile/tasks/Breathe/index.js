@@ -10,6 +10,7 @@ import useUpdateOSC from "utils/hooks/users/useUpdateOSC";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
+import axios from "axios";
 
 import { toast, Toast } from "loplat-ui";
 
@@ -36,7 +37,7 @@ const SCRIPTS = [
   },
 ];
 
-export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) {
+export default function Comp({ userName = "Cyan", plant, osc }) {
   const router = useRouter();
 
   const [state, setState] = useState(0);
@@ -44,13 +45,17 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
 
   const [triggerUpdate, setTriggerUpdate] = useState(false);
 
+  const socket = useSocket({
+    pageURL: "/screen/breathe",
+  });
+
   function handleBackClick() {
-    router.push(`/home?userName=${userName}&osc=${osc}`);
+    router.push(`/home?userName=${userName}&osc=${osc}&plant=${plant}`);
   }
 
   function handleButtonClick() {
     if (state !== 2) return;
-    router.push(`/home?userName=${userName}&osc=${osc + (state === 2 ? 26 : 0)}`);
+    router.push(`/home?userName=${userName}&osc=${osc + (state === 2 ? 26 : 0)}&plant=${plant}`);
   }
 
   const [secCountDown, setSecCountDown] = useState(25);
@@ -86,8 +91,16 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     if (state === 2) {
       toast.success("26 OSC added", 2000);
       setTriggerUpdate(true);
+      updatePlantOSC();
     }
   }, [state, secCountDown]);
+
+  async function updatePlantOSC() {
+    await axios.post("/api/prisma/plants/update-plant-osc", {
+      name: plant,
+      osc: plantInfo.osc + 26,
+    });
+  }
 
   useEffect(() => {
     if (state === 1) {

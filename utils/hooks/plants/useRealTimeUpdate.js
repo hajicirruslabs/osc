@@ -76,7 +76,6 @@ export function useUpdateOSCFromArray({ oscArray }) {
 
   async function handleUpdate(singlePlant) {
     if (!singlePlant) return;
-    console.log(singlePlant);
     let res = await axios.post("/api/prisma/plants/update-plant-osc", singlePlant);
   }
 }

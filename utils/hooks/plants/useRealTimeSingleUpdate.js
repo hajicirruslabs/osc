@@ -26,7 +26,7 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
   );
 
   function handleRandomlyAdjustOSC() {
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 150))));
+    let randomAdjustment = getRandomInt(-20, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 300))));
     let newOSC = plant.osc + randomAdjustment;
     let newPerformance = plant.totalPerformance + randomAdjustment;
     if (newOSC < 0) newOSC = 0;
@@ -42,13 +42,10 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
 
   useUpdateOSCFromArray({ realTimePlant });
 
-  console.log(realTimePlant);
-
   return realTimePlant;
 }
 
 export function useUpdateOSCFromArray({ realTimePlant }) {
-  console.log(realTimePlant);
   useEffect(() => {
     //compare oscarray with storedoscref.current
     if (!realTimePlant) return;

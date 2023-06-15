@@ -27,6 +27,7 @@ export default function Comp() {
   });
 
   const [heartEls, setHeartEls] = useState([]);
+  const [valD, setValD] = useState(324589);
   function handleNewHeart(data) {
     setHeartEls((prev) => [...prev, data]);
     setValD((prev) => prev + 1);
@@ -93,7 +94,7 @@ export default function Comp() {
           {singlePlant ? singlePlant.osc : 53231}
         </S.VideoUpperLower>
       </S.VideoUpper>
-      <Params />
+      <Params valD={valD} setValD={setValD} />
       {heartEls.map((el, i) => (
         <SingleHeartEl key={i} startPos={el} socket={socket} />
       ))}
@@ -101,11 +102,10 @@ export default function Comp() {
   );
 }
 
-function Params() {
+function Params({ valD, setValD }) {
   const [valA, setValA] = useState(63);
   const [valB, setValB] = useState(12308);
   const [valC, setValC] = useState(3.4);
-  const [valD, setValD] = useState(324589);
   const [valE, setValE] = useState(437);
 
   useRandomInterval(
@@ -161,8 +161,6 @@ function VideoContainer({ plant }) {
     setVidArray(output);
     setStopUpdate(true);
   }, [plant, stopUpdate]);
-
-  console.log(vidArray);
 
   return (
     <S.VideoContainer>

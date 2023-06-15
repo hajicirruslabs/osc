@@ -17,7 +17,7 @@ export default function Page() {
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
       </Head>
       <TaskBackgroundContainer color={"#FFF0E8"}>
-        <Breathe userName={userName} osc={parseFloat(osc)} />
+        <Breathe userName={userName} osc={parseFloat(osc)} plant={plant} />
       </TaskBackgroundContainer>
     </>
   );

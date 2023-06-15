@@ -7,7 +7,6 @@ const getRandom = (min, max) => Math.random() * (max - min) + min;
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 export default function useRealTimeUpdate() {
   const plants = useRetriveLocalPlants();
-  console.log(plants);
 
   const [realTimePlants, setRealTimePlants] = useState(plants);
   useEffect(() => {
@@ -61,7 +60,7 @@ export default function useRealTimeUpdate() {
   function handleRandomlyAdjustOSC() {
     if (!realTimePlants || realTimePlants.length === 0) return;
     let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 150))));
+    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 300))));
     let newOSC = randomPlant.osc + randomAdjustment;
     let newPerformance = randomPlant.totalPerformance + randomAdjustment;
     if (newOSC < 0) newOSC = 0;
@@ -107,7 +106,6 @@ export function useUpdateOSCFromArray({ oscArray }) {
 
   async function handleUpdate(singlePlant) {
     if (!singlePlant) return;
-    console.log(singlePlant);
     let res = await axios.post("/api/prisma/plants/update-plant-osc", singlePlant);
   }
 }
