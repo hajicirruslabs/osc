@@ -6,6 +6,7 @@ import Header from "foundations/tasks/Header";
 import useResize from "utils/hooks/useResize";
 import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useRandomInterval from "utils/hooks/useRandomInterval";
+import useUpdateOSC from "utils/hooks/useUpdateOSC";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
@@ -37,11 +38,20 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     onRest: () => {},
   });
 
+  const [triggerUpdate, setTriggerUpdate] = useState(false);
   useEffect(() => {
     if (second === 0) {
+      setTriggerUpdate(true);
       toast.success("15 OSC added", 2000);
     }
   }, [second]);
+
+  useUpdateOSC({
+    updateOSC: osc + 15,
+    triggerUpdate,
+    setTriggerUpdate,
+    name: userName,
+  });
 
   //back click
   function handleBackClick() {

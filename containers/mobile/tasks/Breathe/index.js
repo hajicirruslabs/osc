@@ -6,6 +6,10 @@ import Header from "foundations/tasks/Header";
 
 import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useResize from "utils/hooks/useResize";
+import useUpdateOSC from "utils/hooks/useUpdateOSC";
+
+import { useSpring } from "react-spring";
+import * as easings from "d3-ease";
 
 import { toast, Toast } from "loplat-ui";
 
@@ -38,13 +42,15 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
   const [state, setState] = useState(0);
   const [errorState, setErrorState] = useState(0);
 
+  const [triggerUpdate, setTriggerUpdate] = useState(false);
+
   function handleBackClick() {
-    if (state !== 2) return;
     router.push(`/home?userName=${userName}&osc=${osc}`);
   }
 
   function handleButtonClick() {
-    router.push(`/home?userName=${userName}&osc=${osc}`);
+    if (state !== 2) return;
+    router.push(`/home?userName=${userName}&osc=${osc + (triggerUpdate ? 26 : 0)}`);
   }
 
   const [secCountDown, setSecCountDown] = useState(25);
@@ -58,9 +64,28 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     return () => clearInterval(interval);
   }, []);
 
+  const [displayOsc, setDisplayOsc] = useState(osc);
+  useEffect(() => {
+    setDisplayOsc(osc);
+  }, [osc]);
+
+  useSpring({
+    from: { progress: 0 },
+    to: { progress: triggerUpdate ? 1 : 0 },
+    config: { duration: 3000, easing: easings.easeCubicOut },
+    onChange: ({ value }) => {
+      setDisplayOsc(osc + 15 * value.progress);
+    },
+    onRest: () => {},
+  });
+
   useEffect(() => {
     if (state === 0 && secCountDown === 0) {
       setState(1);
+    }
+    if (state === 2) {
+      toast.success("25 OSC added", 2000);
+      setTriggerUpdate(true);
     }
   }, [state, secCountDown]);
 
@@ -74,6 +99,13 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
     }
   }, [state]);
 
+  useUpdateOSC({
+    updateOSC: osc + 25,
+    triggerUpdate,
+    setTriggerUpdate,
+    name: userName,
+  });
+
   return (
     <S.Container>
       <Header
@@ -82,7 +114,7 @@ export default function Comp({ userName = "Cyan", plantName = "Sage038", osc }) 
           name: "Breathe Life",
           osc: 26,
         }}
-        osc={osc}
+        osc={displayOsc.toFixed(0)}
         handleBackClick={handleBackClick}
       />
       <S.Text>
@@ -129,7 +161,7 @@ function ErrorComponent({ errorState, setErrorState, setState }) {
   function handleStateOne() {
     const interval = setInterval(() => {
       addWarningLocations();
-    }, 150);
+    }, 100);
     const timeout = setTimeout(() => {
       setErrorState(2);
       clearInterval(interval);

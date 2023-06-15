@@ -18,9 +18,20 @@ export default function Comp({ plant, isLarge = false }) {
     setPlantInfo(targetPlant);
   }
 
+  const [imgLoaded, setImgLoaded] = useState(false);
+
   return (
     <S.ModelContainer isLarge={isLarge}>
-      {plantInfo && <img src={`/assets/plants/img/` + plantInfo.placeholderImg} />}
+      {plantInfo && (
+        <img
+          style={{
+            opacity: imgLoaded ? 1 : 0,
+            transition: "opacity 0.5s",
+          }}
+          onLoad={() => setImgLoaded(true)}
+          src={`/assets/plants/img/` + plantInfo.placeholderImg}
+        />
+      )}
       {plantInfo && <S.OverlayText>{prefixGenerator(plantInfo.ranking || 10)}</S.OverlayText>}
     </S.ModelContainer>
   );
