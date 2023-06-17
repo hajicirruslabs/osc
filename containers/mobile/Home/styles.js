@@ -73,13 +73,13 @@ export const BalanceSection = styled.div`
       transform: rotate(0deg);
     }
     20% {
-      transform: rotate(5deg);
+      transform: rotate(8deg);
     }
     40% {
       transform: rotate(0deg);
     }
     60% {
-      transform: rotate(-5deg);
+      transform: rotate(-8deg);
     }
     80% {
       transform: rotate(0deg);
@@ -127,10 +127,10 @@ export const SurroundingCirlces = styled.div`
       transform: scale(1);
     }
     30% {
-      transform: scale(1.09);
+      transform: scale(1.11);
     }
     50% {
-      transform: scale(1.09);
+      transform: scale(1.11);
     }
     80% {
       transform: scale(1);

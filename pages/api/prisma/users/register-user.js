@@ -22,7 +22,6 @@ export default async function handler(req, res) {
         id: true,
       },
     });
-    console.log(existing, plantRes);
 
     if (!existing) {
       const result = await prisma.user.create({
@@ -42,7 +41,7 @@ export default async function handler(req, res) {
       res.status(200).json({
         name,
         osc: existing.osc,
-        plant: existing.plant,
+        plant: existing.plant.name,
         type: "existing",
       });
     }

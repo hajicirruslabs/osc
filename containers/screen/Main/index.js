@@ -46,7 +46,6 @@ const LIST = ["Total OSC given", "Top contributor", "Average care hours/day", "S
 
 export default function Comp() {
   const plants = useRealTimeUpdate();
-  console.log(plants);
 
   const socket = useSocket({
     handleNewPageLocation,

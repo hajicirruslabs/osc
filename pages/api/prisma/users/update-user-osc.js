@@ -2,7 +2,6 @@ import prisma from "lib/prisma";
 
 export default async function handler(req, res) {
   let { name, osc } = req.body;
-  console.log(name, osc);
 
   try {
     //check if keyword exists

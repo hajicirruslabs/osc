@@ -7,14 +7,16 @@ import { Appear } from "@/styles/common";
 export const LoadingContainer = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
-  ${WholeContainer};
+  position: fixed;
+  top: 0;
+  left: 0;
   width: ${({ theme }) => theme.windowWidth}px;
   height: ${({ theme }) => theme.windowHeight}px;
   z-index: 1000;
   pointer-events: none;
 
-  ${({ loading }) =>
-    loading
+  ${({ isLoading }) =>
+    isLoading
       ? `
   
     opacity: 1;

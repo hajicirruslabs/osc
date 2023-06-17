@@ -30,7 +30,7 @@ export default function Comp({ plant, isLarge = false }) {
         <img
           style={{
             opacity: imgLoaded ? 1 : 0,
-            transition: "opacity 0.5s",
+            transition: "all 0.5s",
           }}
           onLoad={() => setImgLoaded(true)}
           src={`/assets/plants/img/` + plantInfo.placeholderImg}

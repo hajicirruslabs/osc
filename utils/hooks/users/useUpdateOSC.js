@@ -10,7 +10,6 @@ export default function useRetriveOSC({ name, updateOSC, triggerUpdate, setTrigg
   }, [name, updateOSC, triggerUpdate]);
 
   async function handleUpdateOSC() {
-    console.log(name, updateOSC);
     if (!name) return;
     let res = await axios.post("/api/prisma/users/update-user-osc", {
       name,

@@ -85,7 +85,7 @@ export default function Comp({ show = false, handleNext }) {
           <S.Button onClick={handleClick}>Log in</S.Button>
         </S.InputContainer>
       </S.Main>
-      <Loading loading={loading} />
+      <Loading isLoading={loading} />
     </S.Container>
   );
 }
