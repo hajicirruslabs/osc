@@ -44,6 +44,18 @@ const DATA = [
 
 const LIST = ["Total OSC given", "Top contributor", "Average care hours/day", "Seasons bloomed", "Time in flourish (in hrs)"];
 
+const parseOSC = (n) => {
+  let str = n.toString();
+  let res = "";
+  for (let i = 0; i < str.length; i++) {
+    if (i % 3 === 0 && i !== 0) {
+      res = "," + res;
+    }
+    res = str[str.length - 1 - i] + res;
+  }
+  return res;
+};
+
 export default function Comp() {
   const plants = useRealTimeUpdate();
 
@@ -130,13 +142,13 @@ export default function Comp() {
               </S.Title>
               <S.SingleEl>
                 <img src="/assets/screen/osc.svg" alt="osc" />
-                {datum.osc}
+                {parseOSC(datum.osc)}
               </S.SingleEl>
               <S.SingleEl>{datum.topContributor}</S.SingleEl>
               <S.SingleEl>{datum.averageCare}</S.SingleEl>
               <S.SingleEl>{datum.seasonsBloomed}</S.SingleEl>
               <S.SingleEl>{datum.time}</S.SingleEl>
-              <S.FinalEl>{datum.totalPerformance}</S.FinalEl>
+              <S.FinalEl>{parseOSC(datum.totalPerformance)}</S.FinalEl>
             </S.SingleColumn>
           ))}
         </S.List>

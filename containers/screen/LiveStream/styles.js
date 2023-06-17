@@ -40,9 +40,19 @@ export const SingleVideo = styled.div`
   height: ${({ theme }) => theme.windowHeight / 3}px;
   mix-blend-mode: difference;
 
+  background: rgba(0, 0, 0, 0.3);
+  font-size: 5vw;
+  color: rgba(0, 0, 0, 0.7);
+
   video {
     margin: 0;
     opacity: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
   }
 
   // video {

@@ -22,22 +22,27 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
       handleRandomlyAdjustOSC();
     },
     30,
-    9 * 1000
+    6000
   );
 
   function handleRandomlyAdjustOSC() {
-    let randomAdjustment = getRandomInt(-20, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 300))));
-    let newOSC = plant.osc + randomAdjustment;
-    let newPerformance = plant.totalPerformance + randomAdjustment;
-    if (newOSC < 0) newOSC = 0;
+    try {
+      let randomAdjustment = getRandomInt(-20, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 300))));
+      let newOSC = plant.osc + randomAdjustment;
+      let newPerformance = plant.totalPerformance + randomAdjustment;
+      if (newOSC < 0) newOSC = 0;
 
-    setRealTimePlant((prev) => {
-      return {
-        ...prev,
-        osc: newOSC,
-        totalPerformance: newPerformance,
-      };
-    });
+      setRealTimePlant((prev) => {
+        return {
+          ...prev,
+          osc: newOSC,
+          totalPerformance: newPerformance,
+        };
+      });
+    } catch (e) {
+      console.log(e);
+    }
+    if (!plant) return;
   }
 
   useUpdateOSCFromArray({ realTimePlant });
@@ -47,6 +52,7 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
 
 export function useUpdateOSCFromArray({ realTimePlant }) {
   useEffect(() => {
+    if (Math.random() > 0.005) return;
     //compare oscarray with storedoscref.current
     if (!realTimePlant) return;
     handleUpdate(realTimePlant);

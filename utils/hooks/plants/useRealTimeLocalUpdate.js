@@ -22,7 +22,7 @@ export default function useRealTimeUpdate() {
       handleRandomlyAdjustOSC();
     },
     10,
-    3 * 1000
+    3000
   );
 
   useRandomInterval(
@@ -35,26 +35,31 @@ export default function useRealTimeUpdate() {
 
   function handleRandomlyParams() {
     if (!realTimePlants || realTimePlants.length === 0) return;
-    let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
 
-    let rand = Math.random();
-    let newAverageCare = rand ? Math.round(randomPlant.averageCare * getRandom(1 / 1.01, 1.01) * 100) / 100 : randomPlant.averageCare;
-    let newTime = !rand ? Math.round(randomPlant.time * getRandom(1 / 1.01, 1.01)) : randomPlant.time;
+    try {
+      let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
 
-    setRealTimePlants((prev) => {
-      let newPlants = prev.map((plant) => {
-        if (plant.id === randomPlant.id) {
-          return {
-            ...plant,
-            averageCare: newAverageCare,
-            time: newTime,
-          };
-        } else {
-          return plant;
-        }
+      let rand = Math.random();
+      let newAverageCare = rand ? Math.round(randomPlant.averageCare * getRandom(1 / 1.01, 1.01) * 100) / 100 : randomPlant.averageCare;
+      let newTime = !rand ? Math.round(randomPlant.time * getRandom(1 / 1.01, 1.01)) : randomPlant.time;
+
+      setRealTimePlants((prev) => {
+        let newPlants = prev.map((plant) => {
+          if (plant.id === randomPlant.id) {
+            return {
+              ...plant,
+              averageCare: newAverageCare,
+              time: newTime,
+            };
+          } else {
+            return plant;
+          }
+        });
+        return newPlants;
       });
-      return newPlants;
-    });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   function handleRandomlyAdjustOSC() {
@@ -91,6 +96,7 @@ export function useUpdateOSCFromArray({ oscArray }) {
 
   useEffect(() => {
     //compare oscarray with storedoscref.current
+    if (Math.random() > 0.005) return;
     if (!oscArray) return;
     let ref = storedOSCRef.current;
     let differenceArray = oscArray.filter((item) => {

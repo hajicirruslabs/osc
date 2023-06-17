@@ -2,11 +2,30 @@ import * as S from "./styles";
 
 import useRealTimeUpdate from "utils/hooks/plants/useRealTimeUpdate";
 import { useState, useEffect, Suspense } from "react";
+import useResize from "utils/hooks/useResize";
+import useRandomInterval from "utils/hooks/useRandomInterval";
 
 import { TbTriangleFilled, TbTriangleInvertedFilled } from "react-icons/tb";
-import useRandomInterval from "@/utils/hooks/useRandomInterval";
+
+import { QRCodeSVG } from "qrcode.react";
 
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+
+const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
+const URL = `https://www.organicsocialcapital.com?plant=`;
+const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
+const getRandom = (a, b) => Math.random() * (b - a) + a;
+const parseOSC = (n) => {
+  let str = n.toString();
+  let res = "";
+  for (let i = 0; i < str.length; i++) {
+    if (i % 3 === 0 && i !== 0) {
+      res = "," + res;
+    }
+    res = str[str.length - 1 - i] + res;
+  }
+  return res;
+};
 
 export default function Comp({ show }) {
   const plants = useRealTimeUpdate();
@@ -14,12 +33,15 @@ export default function Comp({ show }) {
   const [displayOSC, setDisplayOSC] = useState(true);
   //interval 2s
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setDisplayOSC((prev) => !prev);
-  //   }, 4000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setDisplayOSC((prev) => !prev);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const [qrURL, setQRURL] = useState(URL + getRandomFromArray(ARR));
+  const [windowWidth, windowHeight] = useResize();
 
   return (
     <S.Container show={show}>
@@ -35,7 +57,7 @@ export default function Comp({ show }) {
 
         <S.QRContainer>
           <S.QRWrapper>
-            <img src="/assets/screen/qr.svg" alt="qr" />
+            <QRCodeSVG value={qrURL} bgColor="transparent" fgColor="white" size={windowWidth * 0.08} />
           </S.QRWrapper>
 
           <S.Text>
@@ -70,7 +92,7 @@ export default function Comp({ show }) {
               )}
               <S.ElOSC>
                 {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
-                {displayOSC ? <b>{datum.osc || 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
+                {displayOSC ? <b>{parseOSC(datum.osc) || 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
               </S.ElOSC>
             </S.SingleEl>
           ))}
@@ -175,17 +197,31 @@ function NewsSection() {
 }
 
 function Currency() {
-  // const [a, setA] = useState(1.5);
-  // const [b, setB] = useState(90);
-  // const [c, setC] = useState(45);
-  // const [d, setD] = useState(18);
-  // const [e, setE] = useState(16);
+  const [a, setA] = useState(1.5);
+  const [b, setB] = useState(-90);
+  const [c, setC] = useState(-45);
+  const [d, setD] = useState(-18);
+  const [e, setE] = useState(16);
+  const [f, setF] = useState(-3);
 
-  // useRandomInterval{
-  //   () => {
-  //     const rand = Math.random();
-  //     if (rand < 0.2) setA ( a => a + getRandom)
-  // }
+  useRandomInterval(
+    () => {
+      let rand = Math.random();
+      if (rand < 0.2) setA((a) => Math.floor((a + getRandom(-0.2, 0.3)) * 10) / 10);
+      rand = Math.random();
+      if (rand < 0.2) setB((b) => (Math.floor(b + getRandom(-0.2, 0.2)) * 10) / 10);
+      rand = Math.random();
+      if (rand < 0.2) setC((c) => (Math.floor(c + getRandom(-0.2, 0.2)) * 10) / 10);
+      rand = Math.random();
+      if (rand < 0.2) setD((d) => (Math.floor(d + getRandom(-0.2, 0.2)) * 10) / 10);
+      rand = Math.random();
+      if (rand < 0.2) setE((e) => (Math.floor(e + getRandom(-0.2, 0.2)) * 10) / 10);
+      rand = Math.random();
+      if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.2, 0.3)) * 10) / 10);
+    },
+    10,
+    500
+  );
 
   return (
     <S.CurrencyContainer>
@@ -196,23 +232,23 @@ function Currency() {
       <S.Table>
         <S.LeftColumn>
           <S.TableTitle>Donation per Unit</S.TableTitle>
-          <S.Item up={true}>
+          <S.Item up={a > 0}>
             Breath <span>per exhale</span>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={b > 0}>
             Atenttion <span>per hr</span>
           </S.Item>
 
-          <S.Item up={false}>
+          <S.Item up={c > 0}>
             Blood plasma <span>per ml</span>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={d > 0}>
             Hair follicle <span>per g</span>
           </S.Item>
-          <S.Item up={true}>
+          <S.Item up={e > 0}>
             Nail bed <span>per g</span>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={f > 0}>
             Activated soil <span>per kg</span>
           </S.Item>
         </S.LeftColumn>
@@ -221,44 +257,44 @@ function Currency() {
             {" "}
             <img src="/assets/screen/osc.svg" alt="osc" />
           </S.TableTitle>
-          <S.Item up={true}>
+          <S.Item up={a > 0}>
             <img src="/assets/screen/osc-up.svg" alt="osc" />
-            <S.Span>1.5</S.Span>
+            <S.Span>{Math.abs(a)}</S.Span>
             <b>
               <TbTriangleFilled />
             </b>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={b > 0}>
             <img src="/assets/screen/osc-down.svg" alt="osc" />
-            <S.Span>90</S.Span>
+            <S.Span>{Math.abs(b)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={c > 0}>
             <img src="/assets/screen/osc-down.svg" alt="osc" />
-            <S.Span>45</S.Span>
+            <S.Span>{Math.abs(c)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={d > 0}>
             <img src="/assets/screen/osc-down.svg" alt="osc" />
-            <S.Span>18</S.Span>
+            <S.Span>{Math.abs(d)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
-          <S.Item up={true}>
+          <S.Item up={e > 0}>
             <img src="/assets/screen/osc-up.svg" alt="osc" />
-            <S.Span>16</S.Span>
+            <S.Span>{Math.abs(e)}</S.Span>
             <b>
               <TbTriangleFilled />
             </b>
           </S.Item>
-          <S.Item up={false}>
+          <S.Item up={f > 0}>
             <img src="/assets/screen/osc-down.svg" alt="osc" />
-            <S.Span>3</S.Span>
+            <S.Span>{Math.abs(f)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>

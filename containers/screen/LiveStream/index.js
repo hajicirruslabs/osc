@@ -10,14 +10,32 @@ import useRealTimeUpdate from "utils/hooks/plants/useRealTimeSingleUpdate";
 
 import { useSpring } from "react-spring";
 
+import { BsCameraVideoOffFill } from "react-icons/bs";
+
 const ARRAY_LEFT = ["Activated CO2 in %", "Care hours attended", "Blood-nitrogen in %", "Love given in Hearts", "OSC per capita"];
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 const getRandomInt = (a, b) => Math.floor(Math.random() * (b - a + 1) + a);
 
+const parseOSC = (n) => {
+  let str = n.toString();
+  let res = "";
+  for (let i = 0; i < str.length; i++) {
+    if (i % 3 === 0 && i !== 0) {
+      res = "," + res;
+    }
+    res = str[str.length - 1 - i] + res;
+  }
+  return res;
+};
+
 export default function Comp() {
+  //get router
+  const router = useRouter();
+  const { plant } = router.query;
+
   const [updateActionCompletedOSC, setUpdateActionCompletedOSC] = useState(false);
-  const singlePlant = useRealTimeUpdate({ name: "Fragaria", updateActionCompletedOSC, setUpdateActionCompletedOSC, oscUpdateInterval: 15 });
+  const singlePlant = useRealTimeUpdate({ name: plant, updateActionCompletedOSC, setUpdateActionCompletedOSC, oscUpdateInterval: 15 });
 
   //socket
   const socket = useSocket({
@@ -50,7 +68,6 @@ export default function Comp() {
   ///page management
   const [mobileLocationCheckRequested, setMobileLocationCheckRequested] = useState(false);
 
-  const router = useRouter();
   function handleNewPageLocation(data) {
     setMobileLocationCheckRequested(false);
     router.push(data);
@@ -91,7 +108,7 @@ export default function Comp() {
 
         <S.VideoUpperLower>
           <img src="/assets/screen/osc.svg" alt="osc" />
-          {singlePlant ? singlePlant.osc : 53231}
+          {singlePlant ? parseOSC(singlePlant.osc) : 53231}
         </S.VideoUpperLower>
       </S.VideoUpper>
       <Params valD={valD} setValD={setValD} />
@@ -166,6 +183,7 @@ function VideoContainer({ plant }) {
     <S.VideoContainer>
       {vidArray.map((vid, i) => (
         <S.SingleVideo key={i}>
+          <BsCameraVideoOffFill />
           {vid !== 0 && (
             <video
               width={Math.max(windowWidth, (windowHeight * 16) / 9) / 3}

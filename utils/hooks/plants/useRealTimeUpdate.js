@@ -8,6 +8,7 @@ export default function useRealTimeUpdate() {
   const plants = useRetrivePlants();
 
   const [realTimePlants, setRealTimePlants] = useState(plants);
+
   useEffect(() => {
     setRealTimePlants(plants);
 
@@ -21,30 +22,34 @@ export default function useRealTimeUpdate() {
       handleRandomlyAdjustOSC();
     },
     10,
-    10 * 1000
+    700
   );
 
   function handleRandomlyAdjustOSC() {
     ///
     if (!realTimePlants || realTimePlants.length === 0) return;
-    let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, randomPlant.isLocal ? 100 : 400))));
-    let newOSC = randomPlant.osc + randomAdjustment;
-    if (newOSC < 0) newOSC = 0;
+    try {
+      let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
+      let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, randomPlant.isLocal ? 100 : 400))));
+      let newOSC = randomPlant.osc + randomAdjustment;
+      if (newOSC < 0) newOSC = 0;
 
-    setRealTimePlants((prev) => {
-      let newPlants = prev.map((plant) => {
-        if (plant.id === randomPlant.id) {
-          return {
-            ...plant,
-            osc: newOSC,
-          };
-        } else {
-          return plant;
-        }
+      setRealTimePlants((prev) => {
+        let newPlants = prev.map((plant) => {
+          if (plant.id === randomPlant.id) {
+            return {
+              ...plant,
+              osc: newOSC,
+            };
+          } else {
+            return plant;
+          }
+        });
+        return newPlants;
       });
-      return newPlants;
-    });
+    } catch (e) {
+      console.log(e);
+    }
   }
 
   useUpdateOSCFromArray({ oscArray: realTimePlants });
@@ -58,6 +63,7 @@ export function useUpdateOSCFromArray({ oscArray }) {
   useEffect(() => {
     //compare oscarray with storedoscref.current
     if (!oscArray) return;
+    if (Math.random() > 0.005) return;
     let ref = storedOSCRef.current;
     let differenceArray = oscArray.filter((item) => {
       if (!ref) return true;

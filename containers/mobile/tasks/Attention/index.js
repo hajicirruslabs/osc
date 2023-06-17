@@ -24,7 +24,7 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
   const [second, setSecond] = useState(10);
   const router = useRouter();
   const socket = useSocket({
-    pageURL: "/screen/livestream",
+    pageURL: `/screen/livestream?plant=${plant}`,
   });
 
   const [displayOsc, setDisplayOsc] = useState(osc);

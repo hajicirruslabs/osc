@@ -33,7 +33,7 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
       </S.Text>
 
       <S.ImageZone>
-        <img src="/assets/tasks/donation-1.svg" />
+        <img src="/assets/tasks/donation-2.svg" />
       </S.ImageZone>
 
       <S.ButtonZone onClick={() => router.push(`/home?userName=${userName}&osc=${osc}&plant=${plant}`)}>
