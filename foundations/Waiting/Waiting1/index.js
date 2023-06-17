@@ -233,7 +233,7 @@ function Currency() {
       if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.2, 0.3)) * 10) / 10);
     },
     10,
-    4000
+    2500
   );
 
   return (
