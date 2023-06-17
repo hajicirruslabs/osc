@@ -61,7 +61,7 @@ export default function Comp({ show, bringBack }) {
       </S.LogoContainer>
       <S.Top>Core Principles</S.Top>
 
-      <S.MainText transition={transition}>{SCRIPTS[scriptIdx]}</S.MainText>
+      <S.MainText>{transition ? "Organic Social Capital" : SCRIPTS[scriptIdx]}</S.MainText>
 
       <S.Footer>Powered by Jinhua Group Ltd.</S.Footer>
     </S.Container>

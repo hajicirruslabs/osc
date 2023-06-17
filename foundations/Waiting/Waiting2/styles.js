@@ -53,6 +53,16 @@ export const MainText = styled.div`
   font-weight: bold;
 
   //transition: translateX
+
+  ${({ transition }) =>
+    transition
+      ? `
+opacity: 0;
+ 
+  `
+      : `
+opacity: 1;
+  `}// transition: all ease-in-out;
 `;
 
 export const Footer = styled.div`

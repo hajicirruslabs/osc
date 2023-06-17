@@ -16,15 +16,19 @@ const URL = `https://www.organicsocialcapital.com?plant=`;
 const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 const parseOSC = (n) => {
-  let str = n.toString();
-  let res = "";
-  for (let i = 0; i < str.length; i++) {
-    if (i % 3 === 0 && i !== 0) {
-      res = "," + res;
+  try {
+    let str = n.toString();
+    let res = "";
+    for (let i = 0; i < str.length; i++) {
+      if (i % 3 === 0 && i !== 0) {
+        res = "," + res;
+      }
+      res = str[str.length - 1 - i] + res;
     }
-    res = str[str.length - 1 - i] + res;
+    return res;
+  } catch (e) {
+    return "53,000";
   }
-  return res;
 };
 
 export default function Comp({ show }) {
@@ -92,7 +96,7 @@ export default function Comp({ show }) {
               )}
               <S.ElOSC>
                 {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
-                {displayOSC ? <b>{parseOSC(datum.osc) || 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
+                {displayOSC ? <b>{datum.osc ? parseOSC(datum.osc) : 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
               </S.ElOSC>
             </S.SingleEl>
           ))}
@@ -131,8 +135,15 @@ function Time() {
   const [date, setDate] = useState(new Date());
 
   useEffect(() => {
+    let now = new Date();
+    //make year 2045, other time same
+    now.setFullYear(2045);
+    setDate(now);
     const interval = setInterval(() => {
-      setDate(new Date());
+      let now = new Date();
+      //make year 2045, other time same
+      now.setFullYear(2045);
+      setDate(now);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
@@ -258,42 +269,42 @@ function Currency() {
             <img src="/assets/screen/osc.svg" alt="osc" />
           </S.TableTitle>
           <S.Item up={a > 0}>
-            <img src="/assets/screen/osc-up.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${a > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(a)}</S.Span>
             <b>
               <TbTriangleFilled />
             </b>
           </S.Item>
           <S.Item up={b > 0}>
-            <img src="/assets/screen/osc-down.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${b > 0 ? "up" : "down"}.svg`} malt="osc" />
             <S.Span>{Math.abs(b)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
           <S.Item up={c > 0}>
-            <img src="/assets/screen/osc-down.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${c > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(c)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
           <S.Item up={d > 0}>
-            <img src="/assets/screen/osc-down.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${d > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(d)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />
             </b>
           </S.Item>
           <S.Item up={e > 0}>
-            <img src="/assets/screen/osc-up.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${e > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(e)}</S.Span>
             <b>
               <TbTriangleFilled />
             </b>
           </S.Item>
           <S.Item up={f > 0}>
-            <img src="/assets/screen/osc-down.svg" alt="osc" />
+            <img src={`/assets/screen/osc-${f > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(f)}</S.Span>
             <b>
               <TbTriangleInvertedFilled />

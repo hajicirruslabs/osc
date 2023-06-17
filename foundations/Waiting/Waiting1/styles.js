@@ -154,12 +154,12 @@ export const Time = styled.div`
 
     &:first-child {
       text-align: left;
-      font-size: 1.2vw;
+      font-size: 1.8vw;
     }
 
     &:last-child {
       text-align: right;
-      font-size: 1.8vw;
+      font-size: 1.2vw;
     }
   }
 `;

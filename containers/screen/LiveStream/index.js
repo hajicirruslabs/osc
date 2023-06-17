@@ -18,17 +18,20 @@ const getRandom = (a, b) => Math.random() * (b - a) + a;
 const getRandomInt = (a, b) => Math.floor(Math.random() * (b - a + 1) + a);
 
 const parseOSC = (n) => {
-  let str = n.toString();
-  let res = "";
-  for (let i = 0; i < str.length; i++) {
-    if (i % 3 === 0 && i !== 0) {
-      res = "," + res;
+  try {
+    let str = n.toString();
+    let res = "";
+    for (let i = 0; i < str.length; i++) {
+      if (i % 3 === 0 && i !== 0) {
+        res = "," + res;
+      }
+      res = str[str.length - 1 - i] + res;
     }
-    res = str[str.length - 1 - i] + res;
+    return res;
+  } catch (e) {
+    return "53,000";
   }
-  return res;
 };
-
 export default function Comp() {
   //get router
   const router = useRouter();
