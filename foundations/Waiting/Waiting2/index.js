@@ -18,6 +18,7 @@ const SCRIPTS = [
   `Jinhua knows you care.`,
 ];
 
+const INTERVAL = 3000;
 export default function Comp({ show, bringBack }) {
   const [scriptIdx, setScriptIdx] = useState(0);
 
@@ -25,7 +26,7 @@ export default function Comp({ show, bringBack }) {
     if (!show) return;
     const interval = setInterval(() => {
       setScriptIdx((prev) => (prev + 1) % SCRIPTS.length);
-    }, 2000);
+    }, INTERVAL);
     return () => clearInterval(interval);
   }, [show]);
 
@@ -33,7 +34,7 @@ export default function Comp({ show, bringBack }) {
     if (!show) return;
     const timeout = setTimeout(() => {
       bringBack();
-    }, 2000 * SCRIPTS.length);
+    }, INTERVAL * SCRIPTS.length);
     return () => clearTimeout(timeout);
   }, [show]);
 
@@ -61,7 +62,19 @@ export default function Comp({ show, bringBack }) {
       </S.LogoContainer>
       <S.Top>Core Principles</S.Top>
 
-      <S.MainText>{transition ? "Organic Social Capital" : SCRIPTS[scriptIdx]}</S.MainText>
+      <S.MainText>
+        {transition ? (
+          <div>
+            <p>Organic Social Capital</p>
+            <p>Organic Social Capital</p>
+            <p>Organic Social Capital</p>
+            <p>Organic Social Capital</p>
+            <p>Organic Social Capital</p>
+          </div>
+        ) : (
+          SCRIPTS[scriptIdx]
+        )}
+      </S.MainText>
 
       <S.Footer>Powered by Jinhua Group Ltd.</S.Footer>
     </S.Container>

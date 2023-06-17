@@ -73,33 +73,35 @@ export default function Comp({ show }) {
       <S.Right>
         <h1>Top 9 Flourishing Regions of the Temperates</h1>
         <S.RankingSection>
-          {(plants || DUMMY_DATA).map((datum, i) => (
-            <S.SingleEl key={i} border={datum.isLocal || false}>
-              {i < 3 && (
-                <S.Ranking big={i === 0}>
-                  <img src={`/assets/screen/Ribbon-${i + 1}.svg`} alt="ranking" />
-                </S.Ranking>
-              )}
-              {datum.liveVid && (
-                <video
-                  src={"/assets/plants/" + datum.liveVid}
-                  //autoplay
-                  type="video/mp4"
-                  autoPlay="autoplay"
-                  loop
-                  playsInline
-                  muted
-                  preload="auto"
-                  controls={false}
-                  alt="plant"
-                />
-              )}
-              <S.ElOSC>
-                {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
-                {displayOSC ? <b>{datum.osc ? parseOSC(datum.osc) : 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
-              </S.ElOSC>
-            </S.SingleEl>
-          ))}
+          {(plants || DUMMY_DATA)
+            .sort((a, b) => (b.osc || 0) - (a.osc || 0))
+            .map((datum, i) => (
+              <S.SingleEl key={i} border={datum.isLocal || false}>
+                {i < 3 && (
+                  <S.Ranking big={i === 0}>
+                    <img src={`/assets/screen/Ribbon-${i + 1}.svg`} alt="ranking" />
+                  </S.Ranking>
+                )}
+                {datum.liveVid && (
+                  <video
+                    src={"/assets/plants/" + datum.liveVid}
+                    //autoplay
+                    type="video/mp4"
+                    autoPlay="autoplay"
+                    loop
+                    playsInline
+                    muted
+                    preload="auto"
+                    controls={false}
+                    alt="plant"
+                  />
+                )}
+                <S.ElOSC>
+                  {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
+                  {displayOSC ? <b>{datum.osc ? parseOSC(datum.osc) : 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
+                </S.ElOSC>
+              </S.SingleEl>
+            ))}
         </S.RankingSection>
         <S.BottomInfo>
           <NewsSection />
@@ -220,18 +222,18 @@ function Currency() {
       let rand = Math.random();
       if (rand < 0.2) setA((a) => Math.floor((a + getRandom(-0.2, 0.3)) * 10) / 10);
       rand = Math.random();
-      if (rand < 0.2) setB((b) => (Math.floor(b + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.15) setB((b) => (Math.floor(b + getRandom(-0.2, 0.2)) * 10) / 10);
       rand = Math.random();
       if (rand < 0.2) setC((c) => (Math.floor(c + getRandom(-0.2, 0.2)) * 10) / 10);
       rand = Math.random();
-      if (rand < 0.2) setD((d) => (Math.floor(d + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.25) setD((d) => (Math.floor(d + getRandom(-0.2, 0.2)) * 10) / 10);
       rand = Math.random();
       if (rand < 0.2) setE((e) => (Math.floor(e + getRandom(-0.2, 0.2)) * 10) / 10);
       rand = Math.random();
       if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.2, 0.3)) * 10) / 10);
     },
     10,
-    500
+    4000
   );
 
   return (
