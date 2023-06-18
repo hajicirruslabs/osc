@@ -86,6 +86,15 @@ export default function Comp({ show = false, handleNext }) {
         </S.InputContainer>
       </S.Main>
       <Loading isLoading={loading} />
+      <S.BottomLayer>
+        <h1>OSC: Organic Social Capital</h1>
+        <h2>A Speculative Worldbuilding Artwork by Cyan D'Anjou</h2>
+        <h3>Artist: Cyan D'Anjou, Designer: Cyan D'Anjou, Developer: Jeanyoon Choi</h3>
+        <h4>
+          Royal College of Art Information Experience Design project, web art, sacrifice of motherhood, organic social capital, posthumanism, information experience design, experiential art,
+          interactive art, interspecies living, labor of care, labours of care, post-capitalism, Royal college of art
+        </h4>
+      </S.BottomLayer>
     </S.Container>
   );
 }

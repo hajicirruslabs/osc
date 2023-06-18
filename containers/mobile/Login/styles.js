@@ -115,3 +115,10 @@ export const Button = styled.div`
   font-family: Newsreader;
   cursor: pointer;
 `;
+
+export const BottomLayer = styled.div`
+  ${FlexCenterStyle};
+  ${WholeContainer};
+  z-index: -1;
+  opacity: 0;
+`;

@@ -11,6 +11,8 @@ import Script from "next/script";
 import { useRouter } from "next/router";
 import { pageView } from "lib/ga";
 
+import { DefaultSeo } from "next-seo";
+
 const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
@@ -253,6 +255,8 @@ function MyApp({ Component, pageProps }) {
         <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+
+        <DefaultSeo title="OSC || Organic Social Capital" description="Organic Social Capital: For a flourishing life, a speculative design artwork by Cyan D'Anjou" />
       </Head>
       <Script src="https://www.googletagmanager.com/gtag/js?id=G-2D4T5PS78F" strategy="afterInteractive" />
       <Script id="google-analytics" strategy="afterInteractive">

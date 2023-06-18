@@ -17,6 +17,7 @@
     "d3-ease": "^3.0.1",
     "loplat-ui": "^1.10.2-canary.14",
     "next": "13.0.2",
+    "next-seo": "^6.0.0",
     "prisma": "^4.15.0",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",

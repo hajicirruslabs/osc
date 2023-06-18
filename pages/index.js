@@ -7,6 +7,8 @@ import { useRouter } from "next/router";
 import Intro from "containers/mobile/Intro";
 import Login from "containers/mobile/Login";
 
+import { NextSeo } from "next-seo";
+
 export default function Page() {
   const [state, setState] = useState("intro");
   const [mountLogin, setMountLogin] = useState(false);
@@ -38,8 +40,9 @@ export default function Page() {
     <>
       <Head>
         <title>Organic Social Capital</title>
-        <meta name="description" content="OSC: For a flourishing life" />
+        <meta name="description" content="Organic Social Capital: For a flourishing life" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+        <NextSeo title="Organic Social Capital<" description="Organic Social Capital: For a flourishing life, a speculative design artwork by Cyan D'Anjou" />
       </Head>
       <BackgroundContainer>
         {mountLogin && <Login show={state === "login"} handleNext={handleNext} />}
