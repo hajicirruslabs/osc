@@ -51,14 +51,14 @@ export const Text = styled.div`
   text-align; center;
   ${FlexCenterStyle};
   flex-direction: column;
-  font-size: 20px;
+  font-size: ${({ theme }) => Math.min(theme.windowHeight * 0.02, 20)}px 0;
  
 `;
 
 export const ImageContainer = styled.div`
-  width: 300px;
+  width: ${({ theme }) => Math.min(theme.windowWidth * 0.5, 300)}px;
   height: 250px;
-  margin: 30px 0;
+  margin: ${({ theme }) => Math.min(theme.windowHeight * 0.03, 30)}px 0;
 
   img {
     width: 100%;
