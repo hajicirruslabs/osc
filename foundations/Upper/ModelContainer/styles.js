@@ -20,6 +20,8 @@ right: 10px;
 
   transition: all 0.5s ease-in-out;
 
+  cursor: pointer;
+  z-index: 10;
   img {
     width: 100%;
     height: 100%;

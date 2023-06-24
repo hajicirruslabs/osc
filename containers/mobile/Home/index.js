@@ -77,7 +77,14 @@ export default function Comp({ show, userName, osc, plant }) {
 
   useEffect(() => {
     if (oscStep === 1) {
-      toast.info("Want to earn more OSC?");
+      toast.info("OSC: Organic Social Capital, our world’s most meaningful currency.");
+      const timeout = setTimeout(() => {
+        toast.info("Want to learn more OSC?");
+      }, 2000);
+
+      return () => {
+        clearTimeout(timeout);
+      };
     }
     if (oscStep === 2) {
       toast.danger(`Give to grow your social capital: There is no free OSC.`);
@@ -91,6 +98,9 @@ export default function Comp({ show, userName, osc, plant }) {
         <S.TopSection>
           <h1>Hello, {userName}!</h1>
           <h2>{`Here’s how you’re doing so far`}</h2>
+          <h3>
+            Your region is the <b>Urban Temperates</b>
+          </h3>
         </S.TopSection>
 
         <S.BalanceSection onClick={() => setOscStep(1)}>

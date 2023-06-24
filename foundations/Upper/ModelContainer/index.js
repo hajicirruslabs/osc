@@ -2,6 +2,8 @@ import * as S from "./styles";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
+import { toast, Toast } from "loplat-ui";
+
 const prefixGenerator = (num) => num + (num > 3 ? "th" : ["st", "nd", "rd"][num - 1]);
 
 export default function Comp({ plant, isLarge = false }) {
@@ -25,7 +27,12 @@ export default function Comp({ plant, isLarge = false }) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (
-    <S.ModelContainer isLarge={isLarge}>
+    <S.ModelContainer
+      isLarge={isLarge}
+      onClick={() => {
+        toast.info(`You are supporting ${plantInfo.name}, ranking ${prefixGenerator(plantInfo.ranking)}!`);
+      }}
+    >
       {plantInfo && (
         <img
           style={{
@@ -37,6 +44,7 @@ export default function Comp({ plant, isLarge = false }) {
         />
       )}
       {plantInfo && <S.OverlayText>{prefixGenerator(plantInfo.ranking || 10)}</S.OverlayText>}
+      <Toast />
     </S.ModelContainer>
   );
 }

@@ -34,12 +34,12 @@ const parseOSC = (n) => {
 export default function Comp({ show }) {
   const plants = useRealTimeUpdate();
 
-  const [displayOSC, setDisplayOSC] = useState(true);
+  const [displayOSC, setDisplayOSC] = useState(0);
   //interval 2s
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisplayOSC((prev) => !prev);
+      setDisplayOSC((s) => (s + 1) % 3);
     }, 5000);
     return () => clearInterval(interval);
   }, []);
@@ -97,8 +97,11 @@ export default function Comp({ show }) {
                   />
                 )}
                 <S.ElOSC>
-                  {displayOSC && <img src="/assets/screen/osc.svg" alt="osc" />}
-                  {displayOSC ? <b>{datum.osc ? parseOSC(datum.osc) : 0}</b> : <p>{datum.name + (datum.isLocal ? " (Local Plant)" : "") || ""}</p>}
+                  {displayOSC === 0 && <p>{datum.name}</p>}
+                  {displayOSC === 1 && <img src="/assets/screen/osc.svg" alt="osc" />}
+                  {displayOSC === 1 && <b>{datum.osc ? parseOSC(datum.osc) : 0}</b>}
+
+                  {displayOSC === 2 && <p>{datum.isLocal ? "NE Urban Temperate" : "Other Temperates"}</p>}
                 </S.ElOSC>
               </S.SingleEl>
             ))}

@@ -48,13 +48,19 @@ export default function Comp({ show = false, handleNext }) {
 
   const [loading, setLoading] = useState(false);
 
+  const [textVer, setTextVer] = useState(0);
+
   async function handleClick() {
-    setLoading(true);
-    const res = await axios.post("/api/prisma/users/register-user", {
-      name: inputVal,
-      plant: plant.name,
-    });
-    handleNext(res.data);
+    if (textVer === 0) {
+      setTextVer(1);
+    } else {
+      setLoading(true);
+      const res = await axios.post("/api/prisma/users/register-user", {
+        name: inputVal,
+        plant: plant.name,
+      });
+      handleNext(res.data);
+    }
   }
 
   return (
@@ -65,10 +71,27 @@ export default function Comp({ show = false, handleNext }) {
 
       <S.Main>
         <S.Text>
-          <p>
-            <b>{plant.name}</b> is currently {prefixGenerator(plant.ranking || 10)}
-          </p>
-          <p>most flourishing!</p>
+          {textVer === 0 && (
+            <>
+              <p>
+                Your region is the <b>Northeastern</b>
+              </p>
+              <p>
+                <b>Urban Temperate</b> Zone and you
+              </p>
+              <p>
+                are supporting <b>{plant.name}</b>
+              </p>
+            </>
+          )}
+          {textVer === 1 && (
+            <>
+              <p>
+                <b>{plant.name}</b> is currently {prefixGenerator(plant.ranking || 10)}
+              </p>
+              <p>most flourishing!</p>
+            </>
+          )}
         </S.Text>
 
         <S.ImageContainer>
@@ -76,13 +99,29 @@ export default function Comp({ show = false, handleNext }) {
         </S.ImageContainer>
 
         <S.Text>
-          <p>Increase your OSC by showing</p>
-          <p> how much you care.</p>
+          {textVer === 0 && (
+            <>
+              <p>As you act in favour of its </p>
+              <p>
+                flourishing, you earn <b>Organic</b>
+              </p>
+              <p>
+                <b>Social Capital</b>–our world’s{" "}
+              </p>
+              <p>most meaningful currency.</p>
+            </>
+          )}
+          {textVer === 1 && (
+            <>
+              <p>Your dedicated care makes</p>
+              <p>the ecology grow.</p>
+            </>
+          )}
         </S.Text>
 
         <S.InputContainer>
-          <S.Input type="text" placeholder="Enter your name" value={inputVal} onChange={(e) => setInputVal(e.target.value)} />
-          <S.Button onClick={handleClick}>Log in</S.Button>
+          {textVer === 1 && <S.Input type="text" placeholder="Enter your name" value={inputVal} onChange={(e) => setInputVal(e.target.value)} />}
+          <S.Button onClick={handleClick}>{textVer === 0 ? "Continue" : "Log in"}</S.Button>
         </S.InputContainer>
       </S.Main>
       <Loading isLoading={loading} />

@@ -54,6 +54,15 @@ export const TopSection = styled.div`
     font-size: 18px;
     margin: 0;
   }
+
+  h3 {
+    font-size: 11px;
+    font-style: italic;
+    font-weight: lighter;
+    b {
+      font-weight: bold;
+    }
+  }
 `;
 
 export const BalanceSection = styled.div`

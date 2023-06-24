@@ -52,7 +52,7 @@ export const Text = styled.div`
   ${FlexCenterStyle};
   flex-direction: column;
   font-size: ${({ theme }) => Math.min(theme.windowHeight * 0.02, 20)}px 0;
- 
+
 `;
 
 export const ImageContainer = styled.div`
