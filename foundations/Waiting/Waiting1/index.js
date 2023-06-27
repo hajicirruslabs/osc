@@ -1,7 +1,7 @@
 import * as S from "./styles";
 
 import useRealTimeUpdate from "utils/hooks/plants/useRealTimeUpdate";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef } from "react";
 import useResize from "utils/hooks/useResize";
 import useRandomInterval from "utils/hooks/useRandomInterval";
 
@@ -11,7 +11,8 @@ import { QRCodeSVG } from "qrcode.react";
 
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
+// const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
+const ARR = ["Fragaria"];
 const URL = `https://www.organicsocialcapital.com?plant=`;
 const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandom = (a, b) => Math.random() * (b - a) + a;
@@ -58,6 +59,8 @@ export default function Comp({ show }) {
 
   const [qrURL, setQRURL] = useState(URL + getRandomFromArray(ARR));
   const [windowWidth, windowHeight] = useResize();
+
+  //download qr code svg
 
   return (
     <S.Container show={show}>

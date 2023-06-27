@@ -41,9 +41,12 @@ export default function Page() {
     <>
       <Head>
         <title>Organic Social Capital</title>
-        <meta name="description" content="Organic Social Capital: For a flourishing life. By Cyan D'Anjou." />
+        <meta name="description" content="Organic Social Capital: For a flourishing life. Artwork By Cyan D'Anjou, website developed by Jeanyoon Choi." />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-        <NextSeo title="Organic Social Capital<" description="Organic Social Capital: For a flourishing life, a speculative design artwork by Cyan D'Anjou" />
+        <NextSeo
+          title="Organic Social Capital<"
+          description="Organic Social Capital: For a flourishing life, a speculative design artwork by Cyan D'Anjou, website frontend and backend developed by Jeanyoon Choi."
+        />
       </Head>
       <BackgroundContainer>
         {mountLogin && <Login show={state === "login"} handleNext={handleNext} plantName={plant} />}

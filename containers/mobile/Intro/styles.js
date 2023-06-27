@@ -31,3 +31,8 @@ export const LogoContainer = styled.div`
     width: 100%;
   }
 `;
+
+export const Invisible = styled.div`
+  position: absolute;
+  opacity: 0;
+`;
