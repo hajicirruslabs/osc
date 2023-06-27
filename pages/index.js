@@ -30,6 +30,7 @@ export default function Page() {
   }, [state]);
 
   const router = useRouter();
+  const { plant } = router.query;
 
   function handleNext({ name, osc, plant }) {
     setUserName(name);
@@ -45,7 +46,7 @@ export default function Page() {
         <NextSeo title="Organic Social Capital<" description="Organic Social Capital: For a flourishing life, a speculative design artwork by Cyan D'Anjou" />
       </Head>
       <BackgroundContainer>
-        {mountLogin && <Login show={state === "login"} handleNext={handleNext} />}
+        {mountLogin && <Login show={state === "login"} handleNext={handleNext} plantName={plant} />}
         <Intro show={state === "intro"} />
       </BackgroundContainer>
     </>

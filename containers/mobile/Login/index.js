@@ -26,15 +26,15 @@ const DUMMY_PLANT = {
 const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const prefixGenerator = (num) => num + (num > 3 ? "th" : ["st", "nd", "rd"][num - 1]);
 
-export default function Comp({ show = false, handleNext }) {
+export default function Comp({ show = false, handleNext, plantName }) {
   const [inputVal, setInputVal] = useState("");
   const [plant, setPlant] = useState(DUMMY_PLANT);
 
   useEffect(() => {
-    retrivePlant();
-  }, []);
+    retrivePlant(plantName);
+  }, [plantName]);
 
-  async function retrivePlant() {
+  async function retrivePlant(name) {
     let res = await axios.get("/api/prisma/plants/retrive-all-plants");
     //order by ranking
     let allPlants = res.data.sort((a, b) => b.osc - a.osc);
@@ -43,7 +43,12 @@ export default function Comp({ show = false, handleNext }) {
     allPlants = allPlants.map((plant, i) => ({ ...plant, ranking: i + 1 }));
     const localPlants = allPlants.filter((plant) => plant.isLocal);
     //localplants ranking
-    setPlant(getRandomFromArray(localPlants));
+    if (name) {
+      const targetPlant = localPlants.find((plant) => plant.name === name);
+      setPlant(targetPlant);
+    } else {
+      setPlant(getRandomFromArray(localPlants));
+    }
   }
 
   const [loading, setLoading] = useState(false);
