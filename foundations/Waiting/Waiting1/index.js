@@ -38,9 +38,21 @@ export default function Comp({ show }) {
   //interval 2s
 
   useEffect(() => {
+    setTimeout(() => {
+      setDisplayOSC(1);
+    }, 3 * 1000);
+    setTimeout(() => {
+      setDisplayOSC(2);
+    }, 9 * 1000);
     const interval = setInterval(() => {
-      setDisplayOSC((s) => (s + 1) % 3);
-    }, 5000);
+      setDisplayOSC(0);
+      setTimeout(() => {
+        setDisplayOSC(1);
+      }, 3 * 1000);
+      setTimeout(() => {
+        setDisplayOSC(2);
+      }, 9 * 1000);
+    }, 12 * 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -100,7 +112,6 @@ export default function Comp({ show }) {
                   {displayOSC === 0 && <p>{datum.name}</p>}
                   {displayOSC === 1 && <img src="/assets/screen/osc.svg" alt="osc" />}
                   {displayOSC === 1 && <b>{datum.osc ? parseOSC(datum.osc) : 0}</b>}
-
                   {displayOSC === 2 && <p>{datum.isLocal ? "NE Urban Temperate" : "Other Temperates"}</p>}
                 </S.ElOSC>
               </S.SingleEl>
@@ -114,7 +125,7 @@ export default function Comp({ show }) {
                 <img src="/assets/screen/sunny.svg" alt="Sunny" />
               </S.WeatherLeft>
               <S.WeatherRight>
-                <h1>32ºC</h1>
+                <h1>32.231ºC</h1>
                 <h2>sun showers</h2>
                 <h3>expect weather to affect circadian rhythm of resting plants</h3>
                 <S.WeatherLower>
@@ -223,20 +234,20 @@ function Currency() {
   useRandomInterval(
     () => {
       let rand = Math.random();
-      if (rand < 0.2) setA((a) => Math.floor((a + getRandom(-0.2, 0.3)) * 10) / 10);
+      if (rand < 0.2) setA((a) => Math.floor((a + getRandom(-0.1, 0.1)) * 100) / 100);
       rand = Math.random();
-      if (rand < 0.15) setB((b) => (Math.floor(b + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.15) setB((b) => (Math.floor(b + getRandom(-0.1, 0.1)) * 10) / 10);
       rand = Math.random();
-      if (rand < 0.2) setC((c) => (Math.floor(c + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.2) setC((c) => (Math.floor(c + getRandom(-0.1, 0.1)) * 10) / 10);
       rand = Math.random();
-      if (rand < 0.25) setD((d) => (Math.floor(d + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.25) setD((d) => (Math.floor(d + getRandom(-0.1, 0.1)) * 10) / 10);
       rand = Math.random();
-      if (rand < 0.2) setE((e) => (Math.floor(e + getRandom(-0.2, 0.2)) * 10) / 10);
+      if (rand < 0.3) setE((e) => (Math.floor(e + getRandom(-0.1, 0.1)) * 100) / 100);
       rand = Math.random();
-      if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.2, 0.3)) * 10) / 10);
+      if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.1, 0.1)) * 100) / 100);
     },
     10,
-    2500
+    400
   );
 
   return (

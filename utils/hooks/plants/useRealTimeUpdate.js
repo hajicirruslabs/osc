@@ -22,7 +22,7 @@ export default function useRealTimeUpdate() {
       handleRandomlyAdjustOSC();
     },
     10,
-    700
+    100
   );
 
   function handleRandomlyAdjustOSC() {
