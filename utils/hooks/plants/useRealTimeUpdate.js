@@ -30,7 +30,7 @@ export default function useRealTimeUpdate() {
     if (!realTimePlants || realTimePlants.length === 0) return;
     try {
       let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-      let randomAdjustment = getRandomInt(-40, getRandomInt(-5, getRandomInt(0, getRandomInt(0, randomPlant.isLocal ? 100 : 400))));
+      let randomAdjustment = getRandomInt(-50, 50);
       let newOSC = randomPlant.osc + randomAdjustment;
       // if (newOSC < 0) newOSC = 0;
 
