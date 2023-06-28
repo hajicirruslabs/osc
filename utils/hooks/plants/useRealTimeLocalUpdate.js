@@ -65,7 +65,7 @@ export default function useRealTimeUpdate() {
   function handleRandomlyAdjustOSC() {
     if (!realTimePlants || realTimePlants.length === 0) return;
     let randomPlant = realTimePlants[getRandomInt(0, realTimePlants.length - 1)];
-    let randomAdjustment = getRandomInt(-50, 50);
+    let randomAdjustment = getRandomInt(getRandomInt(-500, -50), getRandomInt(50, 500));
     let newOSC = randomPlant.osc + randomAdjustment;
     let newPerformance = randomPlant.totalPerformance + randomAdjustment;
     // if (newOSC < 0) newOSC = 0;
