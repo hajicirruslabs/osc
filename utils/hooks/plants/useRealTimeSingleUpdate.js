@@ -30,7 +30,7 @@ export default function useRealTimeUpdate({ name, updateActionCompletedOSC, setU
       let randomAdjustment = getRandomInt(-20, getRandomInt(-5, getRandomInt(0, getRandomInt(0, 300))));
       let newOSC = plant.osc + randomAdjustment;
       let newPerformance = plant.totalPerformance + randomAdjustment;
-      if (newOSC < 0) newOSC = 0;
+      // if (newOSC < 0) newOSC = 0;
 
       setRealTimePlant((prev) => {
         return {

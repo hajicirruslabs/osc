@@ -250,7 +250,7 @@ function Currency() {
       if (rand < 0.2) setF((f) => Math.floor((f + getRandom(-0.1, 0.1)) * 100) / 100);
     },
     10,
-    400
+    1200
   );
 
   return (
@@ -268,7 +268,6 @@ function Currency() {
           <S.Item up={b > 0}>
             Atenttion <span>per hr</span>
           </S.Item>
-
           <S.Item up={c > 0}>
             Blood plasma <span>per ml</span>
           </S.Item>
@@ -290,44 +289,32 @@ function Currency() {
           <S.Item up={a > 0}>
             <img src={`/assets/screen/osc-${a > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(a)}</S.Span>
-            <b>
-              <TbTriangleFilled />
-            </b>
+            <b>{a > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}</b>
           </S.Item>
           <S.Item up={b > 0}>
             <img src={`/assets/screen/osc-${b > 0 ? "up" : "down"}.svg`} malt="osc" />
             <S.Span>{Math.abs(b)}</S.Span>
-            <b>
-              <TbTriangleInvertedFilled />
-            </b>
+            {b > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}
           </S.Item>
           <S.Item up={c > 0}>
             <img src={`/assets/screen/osc-${c > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(c)}</S.Span>
-            <b>
-              <TbTriangleInvertedFilled />
-            </b>
+            {c > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}
           </S.Item>
           <S.Item up={d > 0}>
             <img src={`/assets/screen/osc-${d > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(d)}</S.Span>
-            <b>
-              <TbTriangleInvertedFilled />
-            </b>
+            {d > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}
           </S.Item>
           <S.Item up={e > 0}>
             <img src={`/assets/screen/osc-${e > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(e)}</S.Span>
-            <b>
-              <TbTriangleFilled />
-            </b>
+            {e > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}
           </S.Item>
           <S.Item up={f > 0}>
             <img src={`/assets/screen/osc-${f > 0 ? "up" : "down"}.svg`} alt="osc" />
             <S.Span>{Math.abs(f)}</S.Span>
-            <b>
-              <TbTriangleInvertedFilled />
-            </b>
+            {f > 0 ? <TbTriangleFilled /> : <TbTriangleInvertedFilled />}
           </S.Item>
         </S.RightColumn>
       </S.Table>
