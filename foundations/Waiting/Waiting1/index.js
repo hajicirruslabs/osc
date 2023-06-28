@@ -11,8 +11,8 @@ import { QRCodeSVG } from "qrcode.react";
 
 const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
-// const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
-const ARR = ["Fragaria"];
+const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
+
 const URL = `https://www.organicsocialcapital.com?plant=`;
 const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandom = (a, b) => Math.random() * (b - a) + a;
