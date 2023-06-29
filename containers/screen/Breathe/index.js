@@ -18,6 +18,13 @@ export default function Comp() {
 
   const [windowWidth, windowHeight] = useResize();
 
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      router.push("/screen/waiting");
+    }, 105 * 1000);
+    return () => clearTimeout(timeout);
+  }, [router]);
+
   return (
     <S.Container>
       <iframe
@@ -30,6 +37,9 @@ export default function Comp() {
         style={{
           width: `${windowWidth}px`,
           height: `${windowHeight}px`,
+        }}
+        onEnded={() => {
+          router.push("/screen/waiting");
         }}
       />
 

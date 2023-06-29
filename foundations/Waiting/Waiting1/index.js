@@ -76,13 +76,13 @@ export default function Comp({ show }) {
 
         <S.QRContainer>
           <S.QRWrapper>
-            <QRCodeSVG value={qrURL} bgColor="transparent" fgColor="white" size={windowWidth * 0.08} />
+            <QRCodeSVG value={qrURL} bgColor="transparent" fgColor="white" size={windowWidth * 0.1} />
           </S.QRWrapper>
 
-          <S.Text>
+          {/* <S.Text>
             <p>Your region is the 8th highest performing in the current climate zone.</p>
             <p>Please scan to contribute to its longevity.</p>
-          </S.Text>
+          </S.Text> */}
         </S.QRContainer>
       </S.Left>
       <S.Right>

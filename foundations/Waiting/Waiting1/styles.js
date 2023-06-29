@@ -171,12 +171,12 @@ export const QRContainer = styled.div`
 `;
 
 export const QRWrapper = styled.div`
-  width: 8vw;
-  height: 8vw;
+  width: 10vw;
+  height: 10vw;
 
   img {
-    width: 8vw;
-    height: 8vw;
+    width: 10vw;
+    height: 10vw;
   }
 `;
 
