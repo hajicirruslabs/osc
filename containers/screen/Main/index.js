@@ -43,10 +43,9 @@ const DATA = [
 ];
 
 const LIST = ["Total OSC given", "Top contributor", "Average care hours/day", "Seasons bloomed", "Time in flourish (in hrs)"];
-
 const parseOSC = (n) => {
   try {
-    let str = n.toString();
+    let str = Math.abs(n).toString();
     let res = "";
     for (let i = 0; i < str.length; i++) {
       if (i % 3 === 0 && i !== 0) {
@@ -54,7 +53,7 @@ const parseOSC = (n) => {
       }
       res = str[str.length - 1 - i] + res;
     }
-    return res;
+    return n > 0 ? res : "-" + res;
   } catch (e) {
     return "53,000";
   }

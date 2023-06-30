@@ -16,10 +16,9 @@ const ARRAY_LEFT = ["Activated CO2 in %", "Care hours attended", "Blood-nitrogen
 
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 const getRandomInt = (a, b) => Math.floor(Math.random() * (b - a + 1) + a);
-
 const parseOSC = (n) => {
   try {
-    let str = n.toString();
+    let str = Math.abs(n).toString();
     let res = "";
     for (let i = 0; i < str.length; i++) {
       if (i % 3 === 0 && i !== 0) {
@@ -27,11 +26,12 @@ const parseOSC = (n) => {
       }
       res = str[str.length - 1 - i] + res;
     }
-    return res;
+    return n > 0 ? res : "-" + res;
   } catch (e) {
     return "53,000";
   }
 };
+
 export default function Comp() {
   //get router
   const router = useRouter();
