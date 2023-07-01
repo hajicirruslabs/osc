@@ -2,7 +2,6 @@ import { Server } from "socket.io";
 
 export default function handler(req, res) {
   if (res.socket.server.io) {
-    console.log("socket already enabled");
   } else {
     const io = new Server(res.socket.server, {
       cors: {
