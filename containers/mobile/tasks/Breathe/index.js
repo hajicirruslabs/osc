@@ -7,6 +7,7 @@ import Header from "foundations/tasks/Header";
 import useSocket from "utils/hooks/sockets/useSocketMobile";
 import useResize from "utils/hooks/useResize";
 import useUpdateOSC from "utils/hooks/users/useUpdateOSC";
+import { useRetriveSinglePlant } from "utils/hooks/plants/useRetrivePlants";
 
 import { useSpring } from "react-spring";
 import * as easings from "d3-ease";
@@ -42,6 +43,7 @@ export default function Comp({ userName = "Cyan", plant, osc }) {
 
   const [state, setState] = useState(0);
   const [errorState, setErrorState] = useState(0);
+  const plantInfo = useRetriveSinglePlant({ name: plant });
 
   const [triggerUpdate, setTriggerUpdate] = useState(false);
 
@@ -202,13 +204,13 @@ function ErrorComponent({ errorState, setErrorState, setState }) {
       toast.danger(getRandomFromArray(MSGS));
     }, 100);
     const timeoutA = setTimeout(() => {
-      clearInterval(interval);
+      //clearInterval(interval);
     }, 3000);
     const timeout = setTimeout(() => {
       setErrorState(3);
     }, 6500);
     return () => {
-      clearInterval(interval);
+      //clearInterval(interval);
       clearTimeout(timeout);
       clearTimeout(timeoutA);
     };

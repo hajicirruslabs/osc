@@ -13,7 +13,7 @@ const DUMMY_DATA = [{}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 const ARR = ["Fragaria", "Salvia", "Orchidaceae"];
 
-const URL = `https://www.organicsocialcapital.com?plant=`;
+const URL = `https://www.organicsocialcapital.art?plant=`;
 const getRandomFromArray = (arr) => arr[Math.floor(Math.random() * arr.length)];
 const getRandom = (a, b) => Math.random() * (b - a) + a;
 const parseOSC = (n) => {
