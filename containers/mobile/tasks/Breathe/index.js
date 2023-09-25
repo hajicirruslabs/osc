@@ -204,13 +204,13 @@ function ErrorComponent({ errorState, setErrorState, setState }) {
       toast.danger(getRandomFromArray(MSGS));
     }, 100);
     const timeoutA = setTimeout(() => {
-      //clearInterval(interval);
+      clearInterval(interval);
     }, 3000);
     const timeout = setTimeout(() => {
       setErrorState(3);
     }, 6500);
     return () => {
-      //clearInterval(interval);
+      clearInterval(interval);
       clearTimeout(timeout);
       clearTimeout(timeoutA);
     };
